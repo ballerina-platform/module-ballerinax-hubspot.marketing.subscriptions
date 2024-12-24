@@ -28,21 +28,21 @@ Within app developer accounts, you can create developer test accounts to test ap
 
 1. Go to Test Account section from the left sidebar.
 
-   <img src="Home/Pictures/Ballerina Connector Setup Guide Screenshots/1.png" alt="Hubspot developer portal" style="width: 70%;">
+   <img src="../docs/setup/resources/Test1.png" alt="Hubspot developer portal" style="width: 70%;">
 
 2. Click Create developer test account.
 
-   <img src=https://raw.githubusercontent.com/Sadeesha-Sath/module-ballerinax-hubspot.marketing.events/main/docs/setup/resources/test_acc_2.png alt="Hubspot developer testacc" style="width: 70%;">
+   <img src=../docs/setup/resources/Test2.png alt="Hubspot developer testacc" style="width: 70%;">
 
 3. In the dialogue box, give a name to your test account and click create.
 
-   <img src=https://raw.githubusercontent.com/Sadeesha-Sath/module-ballerinax-hubspot.marketing.events/main/docs/setup/resources/test_acc_3.png alt="Hubspot developer testacc3" style="width: 70%;">
+   <img src=../docs/setup/resources/Test3.png alt="Hubspot developer testacc3" style="width: 70%;">
 
 ### Step 3: Create a HubSpot App under your account.
 
 1. In your developer account, navigate to the "Apps" section. Click on "Create App"
 
-   <img src=https://raw.githubusercontent.com/Sadeesha-Sath/module-ballerinax-hubspot.marketing.events/main/docs/setup/resources/create_app_1.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
+   <img src=../docs/setup/resources/Test4.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
 
 2. Provide the necessary details, including the app name and description.
 
@@ -51,7 +51,7 @@ Within app developer accounts, you can create developer test accounts to test ap
 1. Move to the Auth Tab.
 
 
-   <img src=https://raw.githubusercontent.com/Sadeesha-Sath/module-ballerinax-hubspot.marketing.events/main/docs/setup/resources/create_app_2.png alt="Hubspot app creation 2 testacc3" style="width: 70%;">
+   <img src=../docs/setup/resources/Test5.png alt="Hubspot app creation 2 testacc3" style="width: 70%;">
 
 2. In the Scopes section, add the following scopes for your app using the "Add new scope" button.
 
@@ -61,17 +61,17 @@ Within app developer accounts, you can create developer test accounts to test ap
 
    `communication_preferences.statuses.batch.write`
 
-   <img src=https://raw.githubusercontent.com/Sadeesha-Sath/module-ballerinax-hubspot.marketing.events/main/docs/setup/resources/scope_set.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
+   <img src=../docs/setup/resources/Test6.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
 
 4. Add your Redirect URI in the relevant section. You can also use localhost addresses for local development purposes. Click Create App.
 
-   <img src=https://raw.githubusercontent.com/Sadeesha-Sath/module-ballerinax-hubspot.marketing.events/main/docs/setup/resources/create_app_final.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
+   <img src=../docs/setup/resources/Test7.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
 
 ### Step 5: Get your Client ID and Client Secret
 
 - Navigate to the Auth section of your app. Make sure to save the provided Client ID and Client Secret.
 
-   <img src=https://raw.githubusercontent.com/Sadeesha-Sath/module-ballerinax-hubspot.marketing.events/main/docs/setup/resources/get_credentials.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
+   <img src=../docs/setup/resources/Test8.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
 
 ### Step 6: Setup Authentication Flow
 
@@ -89,7 +89,7 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
 2. Paste it in the browser and select your developer test account to intall the app when prompted.
 
-   <img src=https://raw.githubusercontent.com/Sadeesha-Sath/module-ballerinax-hubspot.marketing.events/main/docs/setup/resources/install_app.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
+   <img src=../docs/setup/resources/Test9.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
 
 3. A code will be displayed in the browser. Copy the code.
 
@@ -117,7 +117,7 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
      --data 'grant_type=authorization_code&code=<CODE>&redirect_uri=<YOUR_REDIRECT_URI>&client_id=<YOUR_CLIENT_ID>&client_secret=<YOUR_CLIENT_SECRET>'
      ```
 
-   This command will return the access token necessary for API calls.
+   This command will return a JSON response containing access_token and refresh_token.
 
    ```json
    {
@@ -134,14 +134,14 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
 [//]: # "TODO: Add a quickstart guide to demonstrate a basic functionality of the module, including sample code snippets."
 
-To use the `HubSpot Marketing Events` connector in your Ballerina application, update the `.bal` file as follows:
+To use the `HubSpot Marketing Subcriptions` connector in your Ballerina application, update the `.bal` file as follows:
 
 ### Step 1: Import the module
 
-Import the `hubspot.marketing.events` module and `oauth2` module.
+Import the `hubspot.marketing.subscription` module and `oauth2` module.
 
 ```ballerina
-import ballerinax/hubspot.marketing.events as hsmevents;
+import ballerinax/hubspot.marketing.subscriptions as hsmsubscriptions;
 import ballerina/oauth2;
 ```
 
@@ -155,14 +155,14 @@ import ballerina/oauth2;
     refreshToken = <Refresh Token>
    ```
 
-2. Instantiate a `hsmevents:ConnectionConfig` with the obtained credentials and initialize the connector with it.
+2. Instantiate a `hsmsubscriptions:ConnectionConfig` with the obtained credentials and initialize the connector with it.
 
     ```ballerina 
     configurable string clientId = ?;
     configurable string clientSecret = ?;
     configurable string refreshToken = ?;
 
-    final hsmevents:ConnectionConfig hsmeventsConfig = {
+    final hsmsubscriptions:ConnectionConfig hsmsubscriptionsConfig = {
         auth : {
             clientId,
             clientSecret,
@@ -171,7 +171,7 @@ import ballerina/oauth2;
         }
     };
 
-    final hsmevents:Client hsmevents = check new (hsmeventsConfig, "https://api.hubapi.com");
+    final hsmsubscriptions:Client hsmsubscriptions = check new (hsmsubscriptionsConfig, "https://api.hubapi.com");
     ```
 
 ### Step 3: Invoke the connector operation
@@ -182,11 +182,11 @@ Now, utilize the available connector operations. A sample usecase is shown below
     
 ```ballerina
 public function main() returns error? {
-    hsmevents:MarketingEventDefaultResponse createEvent = check hsmevents->/marketing/v3/marketing\-events/events.post( 
+    hsmsubscriptions:MarketingSubscriptionDefaultResponse createSubscription = check hsmsubscriptions->/marketing/v3/marketing\-subscriptions/subscriptions.post( 
         payload = {
             externalAccountId: "ExternalId",
             eventOrganizer: "Organizer",
-            eventName: "Test Event"
+            eventName: "Test Subscription"
         }
     );
 }
@@ -195,6 +195,6 @@ public function main() returns error? {
 
 ## Examples
 
-The `HubSpot Marketing Events` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-hubspot.marketing.events/tree/main/examples/), covering the following use cases:
+The `HubSpot Marketing Subscriptions` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-hubspot.marketing.subscriptions/tree/main/examples/), covering the following use cases:
 
 [//]: # "TODO: Add examples"
