@@ -180,17 +180,7 @@ Now, utilize the available connector operations. A sample usecase is shown below
 
 #### Create a Marketing Event
     
-```ballerina
-public function main() returns error? {
-    hsmsubscriptions:MarketingSubscriptionDefaultResponse createSubscription = check hsmsubscriptions->/marketing/v3/marketing\-subscriptions/subscriptions.post( 
-        payload = {
-            externalAccountId: "ExternalId",
-            eventOrganizer: "Organizer",
-            eventName: "Test Subscription"
-        }
-    );
-}
-```
+
 
 
 ## Examples
