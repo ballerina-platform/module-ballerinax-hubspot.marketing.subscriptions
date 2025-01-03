@@ -286,12 +286,12 @@
         } ]
       }
     },
-    "/communication-preferences/v4/statuses/batch/unsubscribe-all" : {
+    "/communication-preferences/v4/statuses/batch/unsubscribe-all/write" : {
       "post" : {
         "tags" : [ "Subscription status" ],
         "summary" : "Batch unsubscribe contacts from all subscriptions",
         "description" : "Unsubscribe a set of contacts from all email subscriptions.",
-        "operationId" : "post-/communication-preferences/v4/statuses/batch/unsubscribe-all",
+        "operationId" : "post-/communication-preferences/v4/statuses/batch/unsubscribe-all/write",
         "parameters" : [ {
           "name" : "businessUnitId",
           "in" : "query",
@@ -674,7 +674,7 @@
         }
       },
       "StandardError" : {
-        "required" : [ "category", "context", "errors", "links", "message", "status" ],
+        "required" : [ "category", "context", "message", "status" ],
         "type" : "object",
         "properties" : {
           "subCategory" : {
@@ -1449,3 +1449,4 @@
     }
   }
 }
+
