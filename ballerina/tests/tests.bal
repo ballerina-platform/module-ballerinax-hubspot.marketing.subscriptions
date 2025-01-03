@@ -22,80 +22,79 @@ final Client hubspot = check new Client(config, serviceUrl);
 
 final string testUserId = "48566579";
 
-// @test:Config {
-//     groups: ["live_tests", "mock_tests"]
-// }
-// //Check this one
-// isolated function testGetCommunicationPreferencesbySubscriberId() returns error? {
-//     ActionResponseWithResultsPublicStatus response = check hubspot-> /communication\-preferences/v4/statuses/["senurim@wso2.com"](channel="EMAIL");
-//     test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-//     //test:assertTrue(response?.errors is ());
-//     io:println(response);
+@test:Config {
+    groups: ["live_tests", "mock_tests"]
+}
+//Check this one
+isolated function testGetCommunicationPreferencesbySubscriberId() returns error? {
+    ActionResponseWithResultsPublicStatus response = check hubspot-> /communication\-preferences/v4/statuses/["senurim@wso2.com"](channel="EMAIL");
+    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
+    //test:assertTrue(response?.errors is ());
+    io:println(response);
 
-// }
+}
 
-// @test:Config {
-//     groups: ["live_tests", "mock_tests"]
-// }
+@test:Config {
+    groups: ["live_tests", "mock_tests"]
+}
 
-// isolated function testPostCommunicationPreferencesbySubscriberId() returns error? {
-//     ActionResponseWithResultsPublicStatus response = check hubspot-> /communication\-preferences/v4/statuses/["senurim@wso2.com"].post(
-//         payload={
-//             channel:"EMAIL",
-//             statusState: "SUBSCRIBED",
-//             subscriptionId:1
+isolated function testPostCommunicationPreferencesbySubscriberId() returns error? {
+    ActionResponseWithResultsPublicStatus response = check hubspot-> /communication\-preferences/v4/statuses/["senurim@wso2.com"].post(
+        payload={
+            channel:"EMAIL",
+            statusState: "SUBSCRIBED",
+            subscriptionId:1
 
-//         }
-//     );
-//     test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-//     //test:assertTrue(response?.errors is ());
-//     io:println(response);
+        }
+    );
+    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
+    //test:assertTrue(response?.errors is ());
+    io:println(response);
 
-// }
+}
 
-// @test:Config {
-//     groups: ["live_tests", "mock_tests"]
-// }
+@test:Config {
+    groups: ["live_tests", "mock_tests"]
+}
 
-// isolated function testGetUnsubscribedStatusbySubscriberId() returns error? {
-//     ActionResponseWithResultsPublicWideStatus response = check hubspot-> /communication\-preferences/v4/statuses/["senurim@wso2.com"]/unsubscribe\-all(channel="EMAIL");
-//     test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-//     //test:assertTrue(response?.errors is ());
-//     io:println(response);
+isolated function testGetUnsubscribedStatusbySubscriberId() returns error? {
+    ActionResponseWithResultsPublicWideStatus response = check hubspot-> /communication\-preferences/v4/statuses/["senurim@wso2.com"]/unsubscribe\-all(channel="EMAIL");
+    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
+    //test:assertTrue(response?.errors is ());
+    io:println(response);
 
-// }
+}
 
-// @test:Config {
-//     groups: ["live_tests", "mock_tests"]
-// }
+@test:Config {
+    groups: ["live_tests", "mock_tests"]
+}
 
-// isolated function testPostReadBatchUnsubscribeAll() returns error? {
-//      BatchInputString payload = {
-//             inputs:["senurim@wso2.com"]
-//         };
-//     BatchResponsePublicWideStatusBulkResponse response = check hubspot-> /communication\-preferences/v4/statuses/batch/unsubscribe\-all/read.post(payload,channel="EMAIL");
-//     test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-//     //test:assertTrue(response?.errors is ());
-//     io:println(response);
+isolated function testPostReadBatchUnsubscribeAll() returns error? {
+     BatchInputString payload = {
+            inputs:["senurim@wso2.com"]
+        };
+    BatchResponsePublicWideStatusBulkResponse response = check hubspot-> /communication\-preferences/v4/statuses/batch/unsubscribe\-all/read.post(payload,channel="EMAIL");
+    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
+    //test:assertTrue(response?.errors is ());
+    io:println(response);
 
-// }
+}
 
-// @test:Config {
-//     groups: ["live_tests", "mock_tests"]
-// }
-// //Check this one too. It has the same payload binding error for null values
-// isolated function testPostCommunicationPreferencesBatchRead() returns error? {
-//     BatchInputString payload = {
-//             inputs:["senurim@wso2.com"]
-//         };
+@test:Config {
+    groups: ["live_tests", "mock_tests"]
+}
+//Check this one too. It has the same payload binding error for null values. Again resolved by sanitization
+isolated function testPostCommunicationPreferencesBatchRead() returns error? {
+    BatchInputString payload = {
+            inputs:["senurim@wso2.com"]
+        };
     
-//     BatchResponsePublicStatusBulkResponse response = check hubspot-> /communication\-preferences/v4/statuses/batch/read.post(payload,channel="EMAIL");
-//     test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-//     //test:assertTrue(response?.errors is ());
-//     io:println(response);
-
-// }
-// This one has the ambiguous error
+    BatchResponsePublicStatusBulkResponse response = check hubspot-> /communication\-preferences/v4/statuses/batch/read.post(payload,channel="EMAIL");
+    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
+    //test:assertTrue(response?.errors is ());
+    io:println(response);
+}
+//This one has the ambiguous error - Resolved after sanitization to the api path by adding /read at the end
 @test:Config {
     groups: ["live_tests", "mock_tests"]
 }
@@ -112,51 +111,51 @@ isolated function testPostBatchUnsubscribeAll() returns error? {
 
 }
 
-// @test:Config {
-//     groups: ["live_tests", "mock_tests"]
-// }
+@test:Config {
+    groups: ["live_tests", "mock_tests"]
+}
 
-// isolated function testPostCommunicationPreferencesBatchWWrite() returns error? {
-//     PublicStatusRequest request1 ={
-//          statusState: "SUBSCRIBED",
-//          channel: "EMAIL",
-//          subscriberIdString: "senurim@wso2.com",
-//          subscriptionId: 0
-//     };
-//     BatchInputPublicStatusRequest payload = {
-//             inputs:[request1]
-//         };
+isolated function testPostCommunicationPreferencesBatchWWrite() returns error? {
+    PublicStatusRequest request1 ={
+         statusState: "SUBSCRIBED",
+         channel: "EMAIL",
+         subscriberIdString: "senurim@wso2.com",
+         subscriptionId: 0
+    };
+    BatchInputPublicStatusRequest payload = {
+            inputs:[request1]
+        };
     
-//     BatchResponsePublicStatus response = check hubspot-> /communication\-preferences/v4/statuses/batch/write.post(payload);
-//     test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-//     //test:assertTrue(response?.errors is ());
-//     io:println(response);
+    BatchResponsePublicStatus response = check hubspot-> /communication\-preferences/v4/statuses/batch/write.post(payload);
+    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
+    //test:assertTrue(response?.errors is ());
+    io:println(response);
 
-// }
+}
 
-// @test:Config {
-//     groups: ["live_tests", "mock_tests"]
-// }
+@test:Config {
+    groups: ["live_tests", "mock_tests"]
+}
 
-// isolated function testPostUnsubscribeAllbySubscriberId() returns error? {
-//     ActionResponseWithResultsPublicStatus response = check hubspot-> /communication\-preferences/v4/statuses/["senurim@wso2.com"]/unsubscribe\-all.post(channel="EMAIL");
-//     test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-//     //test:assertTrue(response?.errors is ());
-//     io:println(response);
+isolated function testPostUnsubscribeAllbySubscriberId() returns error? {
+    ActionResponseWithResultsPublicStatus response = check hubspot-> /communication\-preferences/v4/statuses/["senurim@wso2.com"]/unsubscribe\-all.post(channel="EMAIL");
+    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
+    //test:assertTrue(response?.errors is ());
+    io:println(response);
 
-// }
+}
 
-// @test:Config {
-//     groups: ["live_tests", "mock_tests"]
-// }
+@test:Config {
+    groups: ["live_tests", "mock_tests"]
+}
 
-// isolated function testGetSubscriptionStatusDefinitions() returns error? {
-//     ActionResponseWithResultsSubscriptionDefinition response = check hubspot-> /communication\-preferences/v4/definitions;
-//     test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-//     //test:assertTrue(response?.errors is ());
-//     io:println(response);
+isolated function testGetSubscriptionStatusDefinitions() returns error? {
+    ActionResponseWithResultsSubscriptionDefinition response = check hubspot-> /communication\-preferences/v4/definitions;
+    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
+    //test:assertTrue(response?.errors is ());
+    io:println(response);
 
-// }
+}
 
 
 
