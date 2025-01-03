@@ -18,7 +18,7 @@
     "x-hubspot-introduction" : "Use the subscriptions API to programmatically subscribe or unsubscribe contacts from your email subscription types, or unsubscribe a contact from all email communication. These APIs also provide support for business units."
   },
   "servers" : [ {
-    "url" : "https://api.hubapi.com"
+    "url" : "https://api.hubapi.com/communication-preferences/v4"
   } ],
   "tags" : [ {
     "name" : "Subscription status"
@@ -26,7 +26,7 @@
     "name" : "Subscription definitions"
   } ],
   "paths" : {
-    "/communication-preferences/v4/statuses/batch/write" : {
+    "/statuses/batch/write" : {
       "post" : {
         "tags" : [ "Subscription status" ],
         "summary" : "Batch update subscription status",
@@ -65,7 +65,7 @@
         } ]
       }
     },
-    "/communication-preferences/v4/statuses/{subscriberIdString}/unsubscribe-all" : {
+    "/statuses/{subscriberIdString}/unsubscribe-all" : {
       "get" : {
         "tags" : [ "Subscription status" ],
         "summary" : "Retrieve a contact's unsubscribed status",
@@ -215,7 +215,7 @@
         } ]
       }
     },
-    "/communication-preferences/v4/statuses/batch/read" : {
+    "/statuses/batch/read" : {
       "post" : {
         "tags" : [ "Subscription status" ],
         "summary" : "Batch retrieve subscription statuses",
@@ -286,7 +286,7 @@
         } ]
       }
     },
-    "/communication-preferences/v4/statuses/batch/unsubscribe-all/write" : {
+    "/statuses/batch/unsubscribe-all/write" : {
       "post" : {
         "tags" : [ "Subscription status" ],
         "summary" : "Batch unsubscribe contacts from all subscriptions",
@@ -358,7 +358,7 @@
         } ]
       }
     },
-    "/communication-preferences/v4/definitions" : {
+    "/definitions" : {
       "get" : {
         "tags" : [ "Subscription definitions" ],
         "summary" : "Retrieve all subscription status definitions",
@@ -412,7 +412,7 @@
         } ]
       }
     },
-    "/communication-preferences/v4/statuses/batch/unsubscribe-all/read" : {
+    "/statuses/batch/unsubscribe-all/read" : {
       "post" : {
         "tags" : [ "Subscription status" ],
         "summary" : "Batch retrieve contacts who have opted out of all communications",
@@ -483,7 +483,7 @@
         } ]
       }
     },
-    "/communication-preferences/v4/statuses/{subscriberIdString}" : {
+    "/statuses/{subscriberIdString}" : {
       "get" : {
         "tags" : [ "Subscription status" ],
         "summary" : "Get subscription preferences for a specific contact",
