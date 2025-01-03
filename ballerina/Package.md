@@ -1,16 +1,11 @@
 ## Overview
 
-[//]: # "TODO: Add overview mentioning the purpose of the module, supported REST API versions, and other high-level details."
+HubSpot is an AI-powered customer relationship management (CRM) platform. 
 
-[HubSpot](https://www.hubspot.com/our-story) is an customer platform with all the software, integrations, and resources users need to connect their marketing, sales, and customer service.
+The `ballerinax/hubspot.marketing.subscriptions` offers APIs to connect and interact with the [HubSpot API for Marketing Subscriptions](https://developers.hubspot.com/docs/reference/api/marketing/subscriptions#get-%2Fcommunication-preferences%2Fv4%2Fstatuses%2F%7Bsubscriberidstring%7D) endpoints, specifically based on the [HubSpot Marketing Events API v3 OpenAPI spec](https://github.com/HubSpot/HubSpot-public-api-spec-collection/blob/13f888343a8ec443d95de2c12393015ba3391ac6/PublicApiSpecs/Communication%20Preferences/Subscriptions/Rollouts/176901/v4/subscriptions.json).
 
-The `ballerinax/hubspot.marketing.subscriptions` package offers APIs to connect and interact with [HubSpot API for Marketing Subscriptions](https://developers.hubspot.com/docs/reference/api/marketing/subscriptions#get-%2Fcommunication-preferences%2Fv4%2Fstatuses%2F%7Bsubscriberidstring%7D) endpoints, specifically based on [HubSpot Marketing Events API v3 OpenAPI spec](https://github.com/HubSpot/HubSpot-public-api-spec-collection/blob/13f888343a8ec443d95de2c12393015ba3391ac6/PublicApiSpecs/Communication%20Preferences/Subscriptions/Rollouts/176901/v4/subscriptions.json).
-
-Using this API, users can develop applications easily that enables you to programmatically subscribe or unsubscribe contacts from your email subscription types, or unsubscribe a contact from all email communication.. 
 
 ## Setup guide
-
-[//]: # "TODO: Add detailed steps to obtain credentials and configure the module."
 
 To use the HubSpot Marketing Subscriptions Connector, you must have access to the HubSpot API through a HubSpot developer account and a HubSpot App under it. Therefore you need to register for a developer account at HubSpot if you don't have one already.
 
@@ -178,10 +173,14 @@ import ballerina/oauth2;
 
 Now, utilize the available connector operations. A sample usecase is shown below.
 
+#### Get subscription preferences for a specific contact
 
-    
-
-
+```
+public function main() returns error? {
+    ActionResponseWithResultsPublicStatus response = check hubspot-> /communication\-preferences/v4/statuses/["senurim@wso2.com"](channel="EMAIL");
+    io:println(response);
+}  
+```
 
 ## Examples
 
