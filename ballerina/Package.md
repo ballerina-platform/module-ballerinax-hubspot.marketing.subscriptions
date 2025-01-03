@@ -166,7 +166,7 @@ import ballerina/oauth2;
         }
     };
 
-    final hsmsubscriptions:Client hsmsubscriptions = check new (hsmsubscriptionsConfig, "https://api.hubapi.com");
+    final hsmsubscriptions:Client hsmsubscriptions = check new (hsmsubscriptionsConfig, "https://api.hubapi.comcommunication-preferences/v4");
     ```
 
 ### Step 3: Invoke the connector operation
@@ -184,6 +184,6 @@ public function main() returns error? {
 
 ## Examples
 
-The `HubSpot Marketing Subscriptions` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-hubspot.marketing.subscriptions/tree/main/examples/), covering the following use cases:
+The `HubSpot Marketing Subscriptions` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/tree/main/examples/), covering the following use cases:
 
 [//]: # "TODO: Add examples"
