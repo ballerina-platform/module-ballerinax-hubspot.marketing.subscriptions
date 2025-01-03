@@ -784,11 +784,13 @@
           },
           "legalBasis" : {
             "type" : "string",
-            "enum" : [ "LEGITIMATE_INTEREST_PQL", "LEGITIMATE_INTEREST_CLIENT", "PERFORMANCE_OF_CONTRACT", "CONSENT_WITH_NOTICE", "NON_GDPR", "PROCESS_AND_STORE", "LEGITIMATE_INTEREST_OTHER" ]
+            "enum" : [ "LEGITIMATE_INTEREST_PQL", "LEGITIMATE_INTEREST_CLIENT", "PERFORMANCE_OF_CONTRACT", "CONSENT_WITH_NOTICE", "NON_GDPR", "PROCESS_AND_STORE", "LEGITIMATE_INTEREST_OTHER" ],
+            "nullable": true
           },
           "setStatusSuccessReason" : {
             "type" : "string",
-            "enum" : [ "RESUBSCRIBE_OCCURRED", "NO_STATUS_CHANGE", "UNSUBSCRIBE_FROM_ALL_OCCURRED", "REQUESTED_CHANGE_OCCURRED" ]
+            "enum" : [ "RESUBSCRIBE_OCCURRED", "NO_STATUS_CHANGE", "UNSUBSCRIBE_FROM_ALL_OCCURRED", "REQUESTED_CHANGE_OCCURRED" ],
+            "nullable":true
           },
           "source" : {
             "type" : "string"
@@ -798,7 +800,8 @@
             "format" : "int32"
           },
           "legalBasisExplanation" : {
-            "type" : "string"
+            "type" : "string",
+            "nullable":true
           },
           "businessUnitId" : {
             "type" : "integer",
