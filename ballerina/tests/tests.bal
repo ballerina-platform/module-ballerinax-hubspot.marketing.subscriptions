@@ -23,13 +23,12 @@ final string testSubscriberUserId = "bh@hubspot.com";
 @test:Config {
     groups: ["live_tests", "mock_tests"]
 }
-//Check this one
+
 isolated function testGetCommunicationPreferencesbySubscriberId() returns error? {
     ActionResponseWithResultsPublicStatus response = check hubspot-> /statuses/[testSubscriberUserId](channel="EMAIL");
     test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    //test:assertTrue(response?.errors is ());
     io:println(response);
-
+    
 }
 
 @test:Config {
@@ -46,9 +45,8 @@ isolated function testPostCommunicationPreferencesbySubscriberId() returns error
         }
     );
     test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    //test:assertTrue(response?.errors is ());
     io:println(response);
-
+    
 }
 
 @test:Config {
@@ -58,9 +56,7 @@ isolated function testPostCommunicationPreferencesbySubscriberId() returns error
 isolated function testGetUnsubscribedStatusbySubscriberId() returns error? {
     ActionResponseWithResultsPublicWideStatus response = check hubspot-> /statuses/[testSubscriberUserId]/unsubscribe\-all(channel="EMAIL");
     test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    //test:assertTrue(response?.errors is ());
     io:println(response);
-
 }
 
 @test:Config {
@@ -73,15 +69,13 @@ isolated function testPostReadBatchUnsubscribeAll() returns error? {
         };
     BatchResponsePublicWideStatusBulkResponse response = check hubspot-> /statuses/batch/unsubscribe\-all/read.post(payload,channel="EMAIL");
     test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    //test:assertTrue(response?.errors is ());
     io:println(response);
-
 }
 
 @test:Config {
     groups: ["live_tests", "mock_tests"]
 }
-//Check this one too. It has the same payload binding error for null values. Again resolved by sanitization
+
 isolated function testPostCommunicationPreferencesBatchRead() returns error? {
     BatchInputString payload = {
             inputs:[testSubscriberUserId]
@@ -89,24 +83,7 @@ isolated function testPostCommunicationPreferencesBatchRead() returns error? {
     
     BatchResponsePublicStatusBulkResponse response = check hubspot-> /statuses/batch/read.post(payload,channel="EMAIL");
     test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    //test:assertTrue(response?.errors is ());
     io:println(response);
-}
-//This one has the ambiguous error - Resolved after sanitization to the api path by adding /read at the end
-@test:Config {
-    groups: ["live_tests", "mock_tests"]
-}
-
-isolated function testPostBatchUnsubscribeAll() returns error? {
-    BatchInputString payload = {
-            inputs:[testSubscriberUserId]
-        };
-    
-    BatchResponsePublicWideStatusBulkResponse response = check hubspot-> /statuses/batch/unsubscribe\-all/read.post(payload,channel="EMAIL");
-    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    //test:assertTrue(response?.errors is ());
-    io:println(response);
-
 }
 
 @test:Config {
@@ -126,9 +103,7 @@ isolated function testPostCommunicationPreferencesBatchWWrite() returns error? {
     
     BatchResponsePublicStatus response = check hubspot-> /statuses/batch/write.post(payload);
     test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    //test:assertTrue(response?.errors is ());
     io:println(response);
-
 }
 
 @test:Config {
@@ -138,9 +113,7 @@ isolated function testPostCommunicationPreferencesBatchWWrite() returns error? {
 isolated function testPostUnsubscribeAllbySubscriberId() returns error? {
     ActionResponseWithResultsPublicStatus response = check hubspot-> /statuses/[testSubscriberUserId]/unsubscribe\-all.post(channel="EMAIL");
     test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    //test:assertTrue(response?.errors is ());
     io:println(response);
-
 }
 
 @test:Config {
@@ -150,9 +123,7 @@ isolated function testPostUnsubscribeAllbySubscriberId() returns error? {
 isolated function testGetSubscriptionStatusDefinitions() returns error? {
     ActionResponseWithResultsSubscriptionDefinition response = check hubspot-> /definitions;
     test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    //test:assertTrue(response?.errors is ());
     io:println(response);
-
 }
 
 
