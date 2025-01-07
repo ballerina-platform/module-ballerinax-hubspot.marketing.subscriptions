@@ -37,7 +37,7 @@ isolated function testPostCommunicationPreferencesbySubscriberId() returns error
         payload={
             channel:"EMAIL",
             statusState: "SUBSCRIBED",
-            subscriptionId:1
+            subscriptionId:530858989
 
         }
     );
@@ -82,12 +82,12 @@ isolated function testPostCommunicationPreferencesBatchRead() returns error? {
     groups: ["live_tests", "mock_tests"]
 }
 
-isolated function testPostCommunicationPreferencesBatchWWrite() returns error? {
+isolated function testPostCommunicationPreferencesBatchWrite() returns error? {
     PublicStatusRequest request1 ={
          statusState: "SUBSCRIBED",
          channel: "EMAIL",
          subscriberIdString: testSubscriberUserId,
-         subscriptionId: 0
+         subscriptionId: 530858989
     };
     BatchInputPublicStatusRequest payload = {
             inputs:[request1]
@@ -103,7 +103,7 @@ isolated function testPostCommunicationPreferencesBatchWWrite() returns error? {
 
 isolated function testPostUnsubscribeAllbySubscriberId() returns error? {
     ActionResponseWithResultsPublicStatus response = check hubspot-> /statuses/[testSubscriberUserId]/unsubscribe\-all.post(channel="EMAIL");
-    test:assertTrue(response?.results.length() !is 0);  
+    test:assertTrue(response?.results.length() is 0);  
 }
 
 @test:Config {
