@@ -1,6 +1,5 @@
 import ballerina/test;
 import ballerina/oauth2;
-import ballerina/io;
 
 configurable boolean isLiveServer = ?;
 configurable string clientId = ?;
@@ -12,7 +11,7 @@ OAuth2RefreshTokenGrantConfig auth = {
        clientId: clientId,
        clientSecret: clientSecret,
        refreshToken: refreshToken,
-       credentialBearer: oauth2:POST_BODY_BEARER 
+       credentialBearer: oauth2:POST_BODY_BEARER // this line should be added to create auth object.
    };
 
 ConnectionConfig config = {auth: auth};
@@ -26,9 +25,7 @@ final string testSubscriberUserId = "bh@hubspot.com";
 
 isolated function testGetCommunicationPreferencesbySubscriberId() returns error? {
     ActionResponseWithResultsPublicStatus response = check hubspot-> /statuses/[testSubscriberUserId](channel="EMAIL");
-    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    io:println(response);
-    
+    test:assertTrue(response?.results.length() !is 0);   
 }
 
 @test:Config {
@@ -44,9 +41,7 @@ isolated function testPostCommunicationPreferencesbySubscriberId() returns error
 
         }
     );
-    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    io:println(response);
-    
+    test:assertTrue(response?.results.length() !is 0);  
 }
 
 @test:Config {
@@ -55,21 +50,19 @@ isolated function testPostCommunicationPreferencesbySubscriberId() returns error
 
 isolated function testGetUnsubscribedStatusbySubscriberId() returns error? {
     ActionResponseWithResultsPublicWideStatus response = check hubspot-> /statuses/[testSubscriberUserId]/unsubscribe\-all(channel="EMAIL");
-    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    io:println(response);
+    test:assertTrue(response?.results.length() !is 0);  
 }
 
 @test:Config {
     groups: ["live_tests", "mock_tests"]
 }
 
-isolated function testPostReadBatchUnsubscribeAll() returns error? {
+isolated function testPostBatchUnsubscribeAll() returns error? {
      BatchInputString payload = {
             inputs:[testSubscriberUserId]
         };
     BatchResponsePublicWideStatusBulkResponse response = check hubspot-> /statuses/batch/unsubscribe\-all/read.post(payload,channel="EMAIL");
-    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    io:println(response);
+    test:assertTrue(response?.results.length() !is 0);  
 }
 
 @test:Config {
@@ -82,8 +75,7 @@ isolated function testPostCommunicationPreferencesBatchRead() returns error? {
         };
     
     BatchResponsePublicStatusBulkResponse response = check hubspot-> /statuses/batch/read.post(payload,channel="EMAIL");
-    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    io:println(response);
+    test:assertTrue(response?.results.length() !is 0);  
 }
 
 @test:Config {
@@ -102,8 +94,7 @@ isolated function testPostCommunicationPreferencesBatchWWrite() returns error? {
         };
     
     BatchResponsePublicStatus response = check hubspot-> /statuses/batch/write.post(payload);
-    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    io:println(response);
+    test:assertTrue(response?.results.length() !is 0);  
 }
 
 @test:Config {
@@ -112,8 +103,7 @@ isolated function testPostCommunicationPreferencesBatchWWrite() returns error? {
 
 isolated function testPostUnsubscribeAllbySubscriberId() returns error? {
     ActionResponseWithResultsPublicStatus response = check hubspot-> /statuses/[testSubscriberUserId]/unsubscribe\-all.post(channel="EMAIL");
-    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    io:println(response);
+    test:assertTrue(response?.results.length() !is 0);  
 }
 
 @test:Config {
@@ -122,9 +112,10 @@ isolated function testPostUnsubscribeAllbySubscriberId() returns error? {
 
 isolated function testGetSubscriptionStatusDefinitions() returns error? {
     ActionResponseWithResultsSubscriptionDefinition response = check hubspot-> /definitions;
-    test:assertTrue(response?.status is "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE");
-    io:println(response);
+    test:assertTrue(response?.results.length() !is 0);  
 }
+
+
 
 
 
