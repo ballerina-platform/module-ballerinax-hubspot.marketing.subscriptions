@@ -19,12 +19,12 @@ If you don't have a HubSpot Developer Account you can sign up to a free account 
 
 Within app developer accounts, you can create developer test accounts to test apps and integrations without affecting any real HubSpot data.
 
-**_These accounts are only for development and testing purposes. In production you should not use Developer Test Accounts._**
+**Note:** These accounts are only for development and testing purposes. In production you should not use Developer Test Accounts.
 
 1. Go to Test Account section from the left sidebar.
 
    <img src="../docs/setup/resources/Test1.png" alt="Hubspot developer portal" style="width: 70%;">
-
+   
 2. Click Create developer test account.
 
    <img src=../docs/setup/resources/Test2.png alt="Hubspot developer testacc" style="width: 70%;">
@@ -58,7 +58,7 @@ Within app developer accounts, you can create developer test accounts to test ap
 
    <img src=../docs/setup/resources/Test6.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
 
-4. Add your Redirect URI in the relevant section. You can also use localhost addresses for local development purposes. Click Create App.
+4. Add your Redirect URI in the relevant section. You can also use `localhost` addresses for local development purposes. Click Create App.
 
    <img src=../docs/setup/resources/Test7.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
 
@@ -80,17 +80,13 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
    Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>` and `<YOUR_SCOPES>` with your specific value.
 
-    **_NOTE: If you are using a localhost redirect url, make sure to have a listner running at the relevant port before executing the next step. You can use [this gist](https://gist.github.com/lnash94/0af47bfcb7cc1e3d59e06364b3c86b59) and run it using `bal run`. Alternatively, you can use any other method to bind a listner to the port._**
+    **NOTE:** If you are using a `localhost` redirect url, make sure to have a listener running at the relevant port before executing the next step.
 
 2. Paste it in the browser and select your developer test account to intall the app when prompted.
 
    <img src=../docs/setup/resources/Test9.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
 
 3. A code will be displayed in the browser. Copy the code.
-
-   ```
-   Received code: na1-129d-860c-xxxx-xxxx-xxxxxxxxxxxx
-   ```
 
 4. Run the following curl command. Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI`> and `<YOUR_CLIENT_SECRET>` with your specific value. Use the code you received in the above step 3 as the `<CODE>`.
 
@@ -126,8 +122,6 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 5. Store the access token securely for use in your application.
 
 ## Quickstart
-
-[//]: # "TODO: Add a quickstart guide to demonstrate a basic functionality of the module, including sample code snippets."
 
 To use the `HubSpot Marketing Subcriptions` connector in your Ballerina application, update the `.bal` file as follows:
 
@@ -166,7 +160,7 @@ import ballerina/oauth2;
         }
     };
 
-    final hsmsubscriptions:Client hsmsubscriptions = check new (hsmsubscriptionsConfig, "https://api.hubapi.comcommunication-preferences/v4");
+    final hsmsubscriptions:Client hsmsubscriptions = check new (hsmsubscriptionsConfig, "https://api.hubapi.com/communication-preferences/v4");
     ```
 
 ### Step 3: Invoke the connector operation
@@ -185,5 +179,3 @@ public function main() returns error? {
 ## Examples
 
 The `HubSpot Marketing Subscriptions` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/tree/main/examples/), covering the following use cases:
-
-[//]: # "TODO: Add examples"
