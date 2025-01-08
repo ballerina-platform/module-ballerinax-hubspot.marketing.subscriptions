@@ -1,31 +1,48 @@
-import ballerina/test;
+// Copyright (c) 2025, WSO2 LLC. (http://www.wso2.com).
+//
+// WSO2 LLC. licenses this file to you under the Apache License,
+// Version 2.0 (the "License"); you may not use this file except
+// in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
 import ballerina/oauth2;
+import ballerina/test;
 
 configurable boolean isLiveServer = ?;
 configurable string clientId = ?;
 configurable string clientSecret = ?;
 configurable string refreshToken = ?;
-configurable string serviceUrl = ?;
+final string serviceUrl = isLiveServer ? "https://api.hubapi.com/communication-preferences/v4" : "http://localhost:9090";
 
 OAuth2RefreshTokenGrantConfig auth = {
-       clientId: clientId,
-       clientSecret: clientSecret,
-       refreshToken: refreshToken,
-       credentialBearer: oauth2:POST_BODY_BEARER // this line should be added to create auth object.
-   };
+    clientId: clientId,
+    clientSecret: clientSecret,
+    refreshToken: refreshToken,
+    credentialBearer: oauth2:POST_BODY_BEARER // this line should be added to create auth object.
+};
 
 ConnectionConfig config = {auth: auth};
 final Client hubspot = check new Client(config, serviceUrl);
 
 final string testSubscriberUserId = "bh@hubspot.com";
+final int:Signed32 testSubscriptionId = 530858989;
 
 @test:Config {
     groups: ["live_tests", "mock_tests"]
 }
 
 isolated function testGetCommunicationPreferencesbySubscriberId() returns error? {
-    ActionResponseWithResultsPublicStatus response = check hubspot-> /statuses/[testSubscriberUserId](channel="EMAIL");
-    test:assertTrue(response?.results.length() !is 0);   
+    ActionResponseWithResultsPublicStatus response = check hubspot->/statuses/[testSubscriberUserId](channel = "EMAIL");
+    test:assertTrue(response?.results.length() !is 0);
 }
 
 @test:Config {
@@ -33,15 +50,15 @@ isolated function testGetCommunicationPreferencesbySubscriberId() returns error?
 }
 
 isolated function testPostCommunicationPreferencesbySubscriberId() returns error? {
-    ActionResponseWithResultsPublicStatus response = check hubspot-> /statuses/[testSubscriberUserId].post(
-        payload={
-            channel:"EMAIL",
+    ActionResponseWithResultsPublicStatus response = check hubspot->/statuses/[testSubscriberUserId].post(
+        payload = {
+            channel: "EMAIL",
             statusState: "SUBSCRIBED",
-            subscriptionId:530858989
+            subscriptionId: testSubscriptionId
 
         }
     );
-    test:assertTrue(response?.results.length() !is 0);  
+    test:assertTrue(response?.results.length() !is 0);
 }
 
 @test:Config {
@@ -49,8 +66,8 @@ isolated function testPostCommunicationPreferencesbySubscriberId() returns error
 }
 
 isolated function testGetUnsubscribedStatusbySubscriberId() returns error? {
-    ActionResponseWithResultsPublicWideStatus response = check hubspot-> /statuses/[testSubscriberUserId]/unsubscribe\-all(channel="EMAIL");
-    test:assertTrue(response?.results.length() !is 0);  
+    ActionResponseWithResultsPublicWideStatus response = check hubspot->/statuses/[testSubscriberUserId]/unsubscribe\-all(channel = "EMAIL");
+    test:assertTrue(response?.results.length() !is 0);
 }
 
 @test:Config {
@@ -58,11 +75,11 @@ isolated function testGetUnsubscribedStatusbySubscriberId() returns error? {
 }
 
 isolated function testPostBatchUnsubscribeAll() returns error? {
-     BatchInputString payload = {
-            inputs:[testSubscriberUserId]
-        };
-    BatchResponsePublicWideStatusBulkResponse response = check hubspot-> /statuses/batch/unsubscribe\-all/read.post(payload,channel="EMAIL");
-    test:assertTrue(response?.results.length() !is 0);  
+    BatchInputString payload = {
+        inputs: [testSubscriberUserId]
+    };
+    BatchResponsePublicWideStatusBulkResponse response = check hubspot->/statuses/batch/unsubscribe\-all/read.post(payload, channel = "EMAIL");
+    test:assertTrue(response?.results.length() !is 0);
 }
 
 @test:Config {
@@ -71,11 +88,11 @@ isolated function testPostBatchUnsubscribeAll() returns error? {
 
 isolated function testPostCommunicationPreferencesBatchRead() returns error? {
     BatchInputString payload = {
-            inputs:[testSubscriberUserId]
-        };
-    
-    BatchResponsePublicStatusBulkResponse response = check hubspot-> /statuses/batch/read.post(payload,channel="EMAIL");
-    test:assertTrue(response?.results.length() !is 0);  
+        inputs: [testSubscriberUserId]
+    };
+
+    BatchResponsePublicStatusBulkResponse response = check hubspot->/statuses/batch/read.post(payload, channel = "EMAIL");
+    test:assertTrue(response?.results.length() !is 0);
 }
 
 @test:Config {
@@ -83,18 +100,18 @@ isolated function testPostCommunicationPreferencesBatchRead() returns error? {
 }
 
 isolated function testPostCommunicationPreferencesBatchWrite() returns error? {
-    PublicStatusRequest request1 ={
-         statusState: "SUBSCRIBED",
-         channel: "EMAIL",
-         subscriberIdString: testSubscriberUserId,
-         subscriptionId: 530858989
+    PublicStatusRequest request = {
+        statusState: "SUBSCRIBED",
+        channel: "EMAIL",
+        subscriberIdString: testSubscriberUserId,
+        subscriptionId: testSubscriptionId
     };
     BatchInputPublicStatusRequest payload = {
-            inputs:[request1]
-        };
-    
-    BatchResponsePublicStatus response = check hubspot-> /statuses/batch/write.post(payload);
-    test:assertTrue(response?.results.length() !is 0);  
+        inputs: [request]
+    };
+
+    BatchResponsePublicStatus response = check hubspot->/statuses/batch/write.post(payload);
+    test:assertTrue(response?.results.length() !is 0);
 }
 
 @test:Config {
@@ -102,8 +119,8 @@ isolated function testPostCommunicationPreferencesBatchWrite() returns error? {
 }
 
 isolated function testPostUnsubscribeAllbySubscriberId() returns error? {
-    ActionResponseWithResultsPublicStatus response = check hubspot-> /statuses/[testSubscriberUserId]/unsubscribe\-all.post(channel="EMAIL");
-    test:assertTrue(response?.results.length() is 0);  
+    ActionResponseWithResultsPublicStatus response = check hubspot->/statuses/[testSubscriberUserId]/unsubscribe\-all.post(channel = "EMAIL");
+    test:assertTrue(response?.results.length() is 0);
 }
 
 @test:Config {
@@ -111,13 +128,7 @@ isolated function testPostUnsubscribeAllbySubscriberId() returns error? {
 }
 
 isolated function testGetSubscriptionStatusDefinitions() returns error? {
-    ActionResponseWithResultsSubscriptionDefinition response = check hubspot-> /definitions;
-    test:assertTrue(response?.results.length() !is 0);  
+    ActionResponseWithResultsSubscriptionDefinition response = check hubspot->/definitions;
+    test:assertTrue(response?.results.length() !is 0);
 }
-
-
-
-
-
-
 
