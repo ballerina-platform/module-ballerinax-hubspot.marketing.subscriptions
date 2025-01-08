@@ -1,0 +1,14 @@
+[package]
+org = "wso2"
+name = "event_based_email_preference_update"
+version = "0.1.0"
+distribution = "2201.10.3"
+
+[build-options]
+observabilityIncluded = true
+
+[[dependency]]
+org = "ballerinax"
+name = "hubspot.marketing.subscriptions"
+version = "1.0.0"
+repository= "local"

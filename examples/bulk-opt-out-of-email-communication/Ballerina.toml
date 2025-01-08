@@ -1,0 +1,8 @@
+[package]
+org = "wso2"
+name = "bulk_opt_out_of_email_communication"
+version = "0.1.0"
+distribution = "2201.10.3"
+
+[build-options]
+observabilityIncluded = true

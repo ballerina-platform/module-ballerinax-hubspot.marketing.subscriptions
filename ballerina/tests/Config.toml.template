@@ -1,0 +1,4 @@
+isLiveServer= "<boolean(true/false)>"
+clientId= "<clientId>"
+clientSecret= "<clientSecret>"
+refreshToken= "<refreshToken>"
