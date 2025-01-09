@@ -300,7 +300,7 @@ modules = [
 ]
 
 [[package]]
-org = "senurim"
+org = "wso2"
 name = "event_based_email_preference_update"
 version = "0.1.0"
 dependencies = [
@@ -310,6 +310,6 @@ dependencies = [
 	{org = "ballerinax", name = "hubspot.marketing.subscriptions"}
 ]
 modules = [
-	{org = "senurim", packageName = "event_based_email_preference_update", moduleName = "event_based_email_preference_update"}
+	{org = "wso2", packageName = "event_based_email_preference_update", moduleName = "event_based_email_preference_update"}
 ]
 

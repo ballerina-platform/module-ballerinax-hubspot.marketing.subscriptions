@@ -300,7 +300,7 @@ modules = [
 ]
 
 [[package]]
-org = "senurim"
+org = "wso2"
 name = "bulk_opt_out_of_email_communication"
 version = "0.1.0"
 dependencies = [
@@ -310,6 +310,6 @@ dependencies = [
 	{org = "ballerinax", name = "hubspot.marketing.subscriptions"}
 ]
 modules = [
-	{org = "senurim", packageName = "bulk_opt_out_of_email_communication", moduleName = "bulk_opt_out_of_email_communication"}
+	{org = "wso2", packageName = "bulk_opt_out_of_email_communication", moduleName = "bulk_opt_out_of_email_communication"}
 ]
 

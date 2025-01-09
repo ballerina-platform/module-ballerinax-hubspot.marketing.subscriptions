@@ -15,8 +15,8 @@
 // under the License.
 
 import ballerina/io;
-import ballerinax/hubspot.marketing.subscriptions as hsmsubscriptions;
 import ballerina/oauth2;
+import ballerinax/hubspot.marketing.subscriptions as hsmsubscriptions;
 
 // Configuration for the hsmsubscriptions client
 configurable string clientId = ?;          
@@ -35,13 +35,13 @@ final hsmsubscriptions:ConnectionConfig hsmsubscriptionsConfig = {
 };
 
 // Create a client object to interact with the HubSpot Marketing Subscriptions API
-final hsmsubscriptions:Client hsmsubscriptions = check new (hsmsubscriptionsConfig, "https://api.hubapi.com/communication-preferences/v4");
+final hsmsubscriptions:Client hsmsubscriptions = check new (hsmsubscriptionsConfig);
 
 // An array of subscriber user IDs to be processed
 final string[] subscriberUserIdArray = ["bh@hubspot.com"];  // Example subscriber email (can be expanded)
 
 // Subscription ID to filter responses for a specific subscription
-final int:Signed32 subscriptionId = 530858989;
+final int:Signed32 subscriptionId = 530858989; // Example subscription ID
 
 public function main() returns error? {
     // Array to store user IDs who need to be resubscribed
@@ -50,15 +50,13 @@ public function main() returns error? {
     // Loop through each subscriber user ID in the array
     foreach string subscriberUserId in subscriberUserIdArray {
         // Make a request to HubSpot API to check subscription status for each user
-        hsmsubscriptions:ActionResponseWithResultsPublicStatus response = check hsmsubscriptions-> /statuses/[subscriberUserId](channel="EMAIL");
+        hsmsubscriptions:ActionResponseWithResultsPublicStatus response = check hsmsubscriptions-> getCommunicationPreferencesV4StatusesSubscriberidstring(subscriberUserId,channel="EMAIL");
             
         foreach hsmsubscriptions:PublicStatus item in response.results {
-            // Check if the subscription ID matches the one we are interested in
-            if (item.subscriptionId == subscriptionId) {
-                // If the user is unsubscribed, add them to the list of IDs to resubscribe
-                if (item.status == "UNSUBSCRIBED") {
-                    subscriberIdString.push(subscriberUserId);
-                }
+            // Check if the subscription ID matches the one we are interested in,If the user is unsubscribed, add them to the list of IDs to resubscribe
+            if (item.subscriptionId == subscriptionId) && (item.status == "UNSUBSCRIBED") {
+                subscriberIdString.push(subscriberUserId);
+                
             }
         }
     }
@@ -84,7 +82,7 @@ public function main() returns error? {
         };
 
         // Send the batch request to HubSpot API to update the subscription statuses
-        hsmsubscriptions:BatchResponsePublicStatus response = check hsmsubscriptions-> /statuses/batch/write.post(payload);
+        hsmsubscriptions:BatchResponsePublicStatus response = check hsmsubscriptions-> postCommunicationPreferencesV4StatusesBatchWrite(payload);
         io:println("Users are successfully subscribed to this service!");
         
     }
