@@ -25,21 +25,21 @@ Within app developer accounts, you can create developer test accounts to test ap
 
 1. Navigate to 'Test Account' section from the left sidebar.
 
-   ![Hubspot developer portal](../docs/setup/resources/Test1.png)
+   ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/main/docs/setup/resources/Test1.png)   
    
 2. Click 'Create developer test account'.
 
-   ![Hubspot developer portal](../docs/setup/resources/Test2.png)
+   ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/main/docs/setup/resources/Test2.png)
 
 3. In the dialog box, provide a name to your test account and click 'Create'.
 
-   ![Hubspot developer portal](../docs/setup/resources/Test3.png)
+   ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/main/docs/setup/resources/Test3.png)
 
 ### Step 3: Create a HubSpot App under your account.
 
 1. In your developer account, navigate to the 'Apps' section. Click 'Create App'
 
-   ![Hubspot developer portal](../docs/setup/resources/Test4.png)
+   ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/main/docs/setup/resources/Test4.png)
 
 2. Provide the necessary details, including the app name and description.
 
@@ -47,7 +47,7 @@ Within app developer accounts, you can create developer test accounts to test ap
 
 1. Move to the 'Auth' Tab.
 
-   ![Hubspot developer portal](../docs/setup/resources/Test5.png)
+   ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/main/docs/setup/resources/Test5.png)
 
 2. In the Scopes section, add the following scopes for your app by using the 'Add new scope' button.
 
@@ -57,17 +57,17 @@ Within app developer accounts, you can create developer test accounts to test ap
 
    `communication_preferences.statuses.batch.write`
 
-   ![Hubspot developer portal](../docs/setup/resources/Test6.png)
+   ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/main/docs/setup/resources/Test6.png)
 
 4. Add your Redirect URI in the appropriate section. You can also use _localhost_ addresses for local development purposes. Click 'Create App'.
 
-   ![Hubspot developer portal](../docs/setup/resources/Test7.png)
+   ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/main/docs/setup/resources/Test7.png)
 
 ### Step 5: Get your Client ID and Client Secret
 
 - Navigate to the 'Auth' section of your app. Make sure to save the provided Client ID and Client Secret.
 
-   ![Hubspot developer portal](../docs/setup/resources/Test8.png)
+   ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/main/docs/setup/resources/Test8.png)
 
 ### Step 6: Setup Authentication Flow
 
@@ -85,7 +85,7 @@ Before proceeding with the Quickstart, make sure you have obtained the Access To
 
 2. Paste it in the browser and select your developer test account to authorize the app when prompted.
 
-   ![Hubspot developer portal](../docs/setup/resources/Test9.png)
+   ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/main/docs/setup/resources/Test9.png)
 
 3. An authorization code appears in the browser. Copy the code.
 
