@@ -21,7 +21,7 @@ If you don't have a HubSpot Developer Account, you can sign up to a free account
 
 Within app developer accounts, you can create developer test accounts to test apps and integrations without affecting any real HubSpot data.
 
-**Note:** _These accounts are intended solely for development and testing purposes and should not be used in production environments._
+>**Note:** _These accounts are intended solely for development and testing purposes and should not be used in production environments._
 
 1. Navigate to 'Test Account' section from the left sidebar.
 
@@ -81,7 +81,7 @@ Before proceeding with the Quickstart, make sure you have obtained the Access To
 
    Replace the **YOUR_CLIENT_ID**, **YOUR_REDIRECT_URI** and **YOUR_SCOPES** with your specific value.
 
-    **NOTE:** _If you are using a localhost redirect url, make sure to have a listener running at the relevant port before executing the next step._
+    >**NOTE:** _If you are using a localhost redirect url, make sure to have a listener running at the relevant port before executing the next step._
 
 2. Paste it in the browser and select your developer test account to authorize the app when prompted.
 
@@ -172,7 +172,7 @@ Now, utilize the available connector operations. A sample use case is shown belo
 
 ```
 public function main() returns error? {
-    getCommunicationPreferencesV4StatusesSubscriberidstring(subscriberUserId,channel = "EMAIL");
+    hsmsubscriptions: ActionResponseWithResultsPublicWideStatus response=getCommunicationPreferencesV4StatusesSubscriberidstring(subscriberUserId,channel = "EMAIL");
 }  
 ```
 ### Step 4: Run the Ballerina application
