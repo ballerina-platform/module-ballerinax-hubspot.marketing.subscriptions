@@ -15,17 +15,14 @@
 // under the License.
 
 import ballerina/http;
-import ballerina/log;
 
-listener http:Listener httpListener = new (9090);
-
-http:Service mockService = service object {
+service on new http:Listener(9090) {
     # Retrieve all subscription status definitions
     # + return - successful operation 
-    resource isolated function get definitions() returns ActionResponseWithResultsSubscriptionDefinition|http:Response {
+    resource isolated function get definitions() returns ActionResponseWithResultsSubscriptionDefinition {
         return {
-            "status": "COMPLETE",
-            "results": [
+            status: "COMPLETE",
+            results: [
                 {
                     "businessUnitId": 0,
                     "id": "530858991",
@@ -66,18 +63,19 @@ http:Service mockService = service object {
                     "updatedAt": "2024-12-16T07:05:32.223Z"
                 }
             ],
-            "startedAt": "2025-01-07T09:55:16.916Z",
-            "completedAt": "2025-01-07T09:55:17.401Z"
+            startedAt: "2025-01-07T09:55:16.916Z",
+            completedAt: "2025-01-07T09:55:17.401Z"
         };
     };
+
     # Get subscription preferences for a specific contact
     #
     # + subscriberIdString - The contact's email address.
     # + return - successful operation 
-    resource isolated function get statuses/[string subscriberIdString]() returns ActionResponseWithResultsPublicStatus|http:Response {
+    resource isolated function get statuses/[string subscriberIdString]() returns ActionResponseWithResultsPublicStatus {
         return {
-            "status": "COMPLETE",
-            "results": [
+            status: "COMPLETE",
+            results: [
                 {
                     "businessUnitId": 0,
                     "channel": "EMAIL",
@@ -118,14 +116,15 @@ http:Service mockService = service object {
                     "timestamp": "2025-01-08T04:18:48.015Z"
                 }
             ],
-            "startedAt": "2025-01-08T05:33:44.626Z",
-            "completedAt": "2025-01-08T05:33:45.416Z"
+            startedAt: "2025-01-08T05:33:44.626Z",
+            completedAt: "2025-01-08T05:33:45.416Z"
         };
     };
-    resource isolated function get statuses/[string subscriberIdString]/unsubscribe\-all() returns ActionResponseWithResultsPublicWideStatus|http:Response {
+
+    resource isolated function get statuses/[string subscriberIdString]/unsubscribe\-all() returns ActionResponseWithResultsPublicWideStatus {
         return {
-            "status": "COMPLETE",
-            "results": [
+            status: "COMPLETE",
+            results: [
                 {
                     "wideStatusType": "PORTAL_WIDE",
                     "subscriberIdString": "bh@hubspot.com",
@@ -134,18 +133,19 @@ http:Service mockService = service object {
                     "timestamp": "2025-01-08T04:18:48.015Z"
                 }
             ],
-            "startedAt": "2025-01-08T05:45:01.690Z",
-            "completedAt": "2025-01-08T05:45:02.568Z"
+            startedAt: "2025-01-08T05:45:01.690Z",
+            completedAt: "2025-01-08T05:45:02.568Z"
         };
     };
+
     # Update a contact's subscription status
     #
     # + subscriberIdString - The contact's email address. 
     # + return - successful operation 
-    resource isolated function post statuses/[string subscriberIdString](@http:Payload PartialPublicStatusRequest payload) returns ActionResponseWithResultsPublicStatus|http:Response {
+    resource isolated function post statuses/[string subscriberIdString](@http:Payload PartialPublicStatusRequest payload) returns ActionResponseWithResultsPublicStatus {
         return {
-            "status": "COMPLETE",
-            "results": [
+            status: "COMPLETE",
+            results: [
                 {
                     "businessUnitId": 0,
                     "channel": "EMAIL",
@@ -160,25 +160,27 @@ http:Service mockService = service object {
                     "timestamp": "2025-01-08T05:51:16.245Z"
                 }
             ],
-            "startedAt": "2025-01-08T05:51:16.162Z",
-            "completedAt": "2025-01-08T05:51:16.438Z"
+            startedAt: "2025-01-08T05:51:16.162Z",
+            completedAt: "2025-01-08T05:51:16.438Z"
         };
     };
-    resource isolated function post statuses/[string subscriberIdString]/unsubscribe\-all() returns ActionResponseWithResultsPublicStatus|http:Response {
+
+    resource isolated function post statuses/[string subscriberIdString]/unsubscribe\-all() returns ActionResponseWithResultsPublicStatus {
         return {
-            "status": "COMPLETE",
-            "results": [],
-            "startedAt": "2025-01-08T06:01:18.001Z",
-            "completedAt": "2025-01-08T06:01:18.237Z"
+            status: "COMPLETE",
+            results: [],
+            startedAt: "2025-01-08T06:01:18.001Z",
+            completedAt: "2025-01-08T06:01:18.237Z"
         };
     };
+
     # Batch retrieve subscription statuses
     #
     # + return - successful operation 
-    resource isolated function post statuses/batch/read(@http:Payload BatchInputString payload) returns BatchResponsePublicStatusBulkResponse|http:Response {
+    resource isolated function post statuses/batch/read(@http:Payload BatchInputString payload) returns BatchResponsePublicStatusBulkResponse {
         return {
-            "status": "COMPLETE",
-            "results": [
+            status: "COMPLETE",
+            results: [
                 {
                     "subscriberIdString": "bh@hubspot.com",
                     "statuses": [
@@ -224,17 +226,18 @@ http:Service mockService = service object {
                     ]
                 }
             ],
-            "startedAt": "2025-01-08T06:15:22.294Z",
-            "completedAt": "2025-01-08T06:15:22.352Z"
+            startedAt: "2025-01-08T06:15:22.294Z",
+            completedAt: "2025-01-08T06:15:22.352Z"
         };
     };
+
     # Batch retrieve contacts who have opted out of all communications
     #
     # + return - successful operation 
-    resource isolated function post statuses/batch/unsubscribe\-all/read(@http:Payload BatchInputString payload) returns BatchResponsePublicWideStatusBulkResponse|http:Response {
+    resource isolated function post statuses/batch/unsubscribe\-all/read(@http:Payload BatchInputString payload) returns BatchResponsePublicWideStatusBulkResponse {
         return {
-            "status": "COMPLETE",
-            "results": [
+            status: "COMPLETE",
+            results: [
                 {
                     "subscriberIdString": "bh@hubspot.com",
                     "wideStatuses": [
@@ -248,18 +251,19 @@ http:Service mockService = service object {
                     ]
                 }
             ],
-            "startedAt": "2025-01-08T06:21:20.425Z",
-            "completedAt": "2025-01-08T06:21:20.545Z"
+            startedAt: "2025-01-08T06:21:20.425Z",
+            completedAt: "2025-01-08T06:21:20.545Z"
 
         };
     };
+
     # Batch update subscription status
     #
     # + return - successful operation 
-    resource isolated function post statuses/batch/write(@http:Payload BatchInputPublicStatusRequest payload) returns BatchResponsePublicStatus|http:Response {
+    resource isolated function post statuses/batch/write(@http:Payload BatchInputPublicStatusRequest payload) returns BatchResponsePublicStatus {
         return {
-            "status": "COMPLETE",
-            "results": [
+            status: "COMPLETE",
+            results: [
                 {
                     "businessUnitId": 0,
                     "channel": "EMAIL",
@@ -274,18 +278,9 @@ http:Service mockService = service object {
                     "timestamp": "2025-01-08T06:34:39.478Z"
                 }
             ],
-            "startedAt": "2025-01-08T06:34:39.389Z",
-            "completedAt": "2025-01-08T06:34:39.598Z"
+            startedAt: "2025-01-08T06:34:39.389Z",
+            completedAt: "2025-01-08T06:34:39.598Z"
         };
     };
 };
 
-function init() returns error? {
-    if isLiveServer {
-        log:printInfo("Skiping mock server initialization as the tests are running on live server");
-        return;
-    }
-    log:printInfo("Initiating mock server");
-    check httpListener.attach(mockService, "/");
-    check httpListener.'start();
-}
