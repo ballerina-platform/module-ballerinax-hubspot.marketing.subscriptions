@@ -60,7 +60,7 @@ public function main() returns error? {
             }
         }
     }
-    if (subscriberIdString.length()==0){
+    if subscriberIdString.length()==0{
         io:println("Users are already subscribed to this service!");
     }else{
         // Prepare the request to resubscribe users by changing their subscription status to "SUBSCRIBED"
