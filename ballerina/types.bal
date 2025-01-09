@@ -112,7 +112,7 @@ public type ActionResponseWithResultsSubscriptionDefinition record {
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
-# Represents the Queries record for the operation: post-/communication-preferences/v4/statuses/batch/read
+# Represents the Queries record for the operation: postCommunicationPreferencesV4StatusesBatchRead
 public type PostCommunicationPreferencesV4StatusesBatchReadQueries record {
     # The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`.
     "EMAIL"|"WHATSAPP"|"SMS" channel;
@@ -127,7 +127,7 @@ public type OAuth2RefreshTokenGrantConfig record {|
     string refreshUrl = "https://api.hubapi.com/oauth/v1/token";
 |};
 
-# Represents the Queries record for the operation: get-/communication-preferences/v4/statuses/{subscriberIdString}/unsubscribe-all
+# Represents the Queries record for the operation: getCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAll
 public type GetCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAllQueries record {
     # The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`.
     "EMAIL"|"WHATSAPP"|"SMS" channel;
@@ -135,6 +135,17 @@ public type GetCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAl
     int businessUnitId?;
     # Set to `true` to include the details of the updated subscription statuses in the response. Not including this parameter will result in an empty response.
     boolean verbose = false;
+};
+
+public type BatchResponsePublicBulkOptOutFromAllResponse record {
+    string completedAt;
+    int:Signed32 numErrors?;
+    string requestedAt?;
+    string startedAt;
+    record {|string...;|} links?;
+    PublicBulkOptOutFromAllResponse[] results;
+    StandardError[] errors?;
+    "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
 # Provides a set of configurations for controlling the behaviours when communicating with a remote HTTP endpoint.
@@ -186,7 +197,7 @@ public type PublicSubscriptionTranslation record {
     int:Signed32 updatedAt;
 };
 
-# Represents the Queries record for the operation: get-/communication-preferences/v4/statuses/{subscriberIdString}
+# Represents the Queries record for the operation: getCommunicationPreferencesV4StatusesSubscriberidstring
 public type GetCommunicationPreferencesV4StatusesSubscriberidstringQueries record {
     # The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`.
     "EMAIL"|"WHATSAPP"|"SMS" channel;
@@ -194,7 +205,7 @@ public type GetCommunicationPreferencesV4StatusesSubscriberidstringQueries recor
     int businessUnitId?;
 };
 
-# Represents the Queries record for the operation: get-/communication-preferences/v4/definitions
+# Represents the Queries record for the operation: getCommunicationPreferencesV4Definitions
 public type GetCommunicationPreferencesV4DefinitionsQueries record {
     # Set to `true` to return subscription translations associated with each definition.
     boolean includeTranslations?;
@@ -274,7 +285,7 @@ public type BatchResponsePublicWideStatusBulkResponse record {
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
-# Represents the Queries record for the operation: post-/communication-preferences/v4/statuses/batch/unsubscribe-all/read
+# Represents the Queries record for the operation: postCommunicationPreferencesV4StatusesBatchUnsubscribeAllRead
 public type PostCommunicationPreferencesV4StatusesBatchUnsubscribeAllReadQueries record {
     # The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`.
     "EMAIL"|"WHATSAPP"|"SMS" channel;
@@ -322,7 +333,7 @@ public type BatchResponsePublicWideStatusBulkResponseWithErrors record {
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
-# Represents the Queries record for the operation: post-/communication-preferences/v4/statuses/{subscriberIdString}/unsubscribe-all
+# Represents the Queries record for the operation: postCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAll
 public type PostCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAllQueries record {
     # The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`.
     "EMAIL"|"WHATSAPP"|"SMS" channel;
@@ -337,3 +348,18 @@ public type ApiKeysConfig record {|
     string private\-app\-legacy;
     string private\-app;
 |};
+
+# Represents the Queries record for the operation: postCommunicationPreferencesV4StatusesBatchUnsubscribeAll
+public type PostCommunicationPreferencesV4StatusesBatchUnsubscribeAllQueries record {
+    # The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`.
+    "EMAIL"|"WHATSAPP"|"SMS" channel;
+    # If you have the [business unit add-on](https://developers.hubspot.com/beta-docs/guides/api/settings/business-units-api), include this parameter to filter results by business unit ID. The default Account business unit will always use `0`.
+    int businessUnitId?;
+    # Set to `true` to include the details of the updated subscription statuses in the response. Not including this parameter will result in an empty response.
+    boolean verbose = false;
+};
+
+public type PublicBulkOptOutFromAllResponse record {
+    string subscriberIdString;
+    PublicStatus[] statuses?;
+};

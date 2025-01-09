@@ -66,7 +66,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - successful operation 
-    resource isolated function get definitions(map<string|string[]> headers = {}, *GetCommunicationPreferencesV4DefinitionsQueries queries) returns ActionResponseWithResultsSubscriptionDefinition|error {
+    remote isolated function getCommunicationPreferencesV4Definitions(map<string|string[]> headers = {}, *GetCommunicationPreferencesV4DefinitionsQueries queries) returns ActionResponseWithResultsSubscriptionDefinition|error {
         string resourcePath = string `/definitions`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
@@ -83,7 +83,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - successful operation 
-    resource isolated function get statuses/[string subscriberIdString](map<string|string[]> headers = {}, *GetCommunicationPreferencesV4StatusesSubscriberidstringQueries queries) returns ActionResponseWithResultsPublicStatus|error {
+    remote isolated function getCommunicationPreferencesV4StatusesSubscriberidstring(string subscriberIdString, map<string|string[]> headers = {}, *GetCommunicationPreferencesV4StatusesSubscriberidstringQueries queries) returns ActionResponseWithResultsPublicStatus|error {
         string resourcePath = string `/statuses/${getEncodedUri(subscriberIdString)}`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
@@ -94,36 +94,13 @@ public isolated client class Client {
         return self.clientEp->get(resourcePath, httpHeaders);
     }
 
-    resource isolated function get statuses/[string subscriberIdString]/unsubscribe\-all(map<string|string[]> headers = {}, *GetCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAllQueries queries) returns ActionResponseWithResultsPublicWideStatus|error {
-        string resourcePath = string `/statuses/${getEncodedUri(subscriberIdString)}/unsubscribe-all`;
-        map<anydata> headerValues = {...headers};
-        if self.apiKeyConfig is ApiKeysConfig {
-            headerValues["private-app-legacy"] = self.apiKeyConfig?.private\-app\-legacy;
-        }
-        resourcePath = resourcePath + check getPathForQueryParam(queries);
-        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
-        return self.clientEp->get(resourcePath, httpHeaders);
-    }
-
-    # Update a contact's subscription status
+    # Retrieve a contact's unsubscribed status
     #
     # + subscriberIdString - The contact's email address.
     # + headers - Headers to be sent with the request 
+    # + queries - Queries to be sent with the request 
     # + return - successful operation 
-    resource isolated function post statuses/[string subscriberIdString](PartialPublicStatusRequest payload, map<string|string[]> headers = {}) returns ActionResponseWithResultsPublicStatus|error {
-        string resourcePath = string `/statuses/${getEncodedUri(subscriberIdString)}`;
-        map<anydata> headerValues = {...headers};
-        if self.apiKeyConfig is ApiKeysConfig {
-            headerValues["private-app-legacy"] = self.apiKeyConfig?.private\-app\-legacy;
-        }
-        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
-        http:Request request = new;
-        json jsonBody = payload.toJson();
-        request.setPayload(jsonBody, "application/json");
-        return self.clientEp->post(resourcePath, request, httpHeaders);
-    }
-
-    resource isolated function post statuses/[string subscriberIdString]/unsubscribe\-all(map<string|string[]> headers = {}, *PostCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAllQueries queries) returns ActionResponseWithResultsPublicStatus|error {
+    remote isolated function getCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAll(string subscriberIdString, map<string|string[]> headers = {}, *GetCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAllQueries queries) returns ActionResponseWithResultsPublicWideStatus|error {
         string resourcePath = string `/statuses/${getEncodedUri(subscriberIdString)}/unsubscribe-all`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
@@ -131,8 +108,7 @@ public isolated client class Client {
         }
         resourcePath = resourcePath + check getPathForQueryParam(queries);
         map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
-        http:Request request = new;
-        return self.clientEp->post(resourcePath, request, httpHeaders);
+        return self.clientEp->get(resourcePath, httpHeaders);
     }
 
     # Batch retrieve subscription statuses
@@ -140,8 +116,27 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - successful operation 
-    resource isolated function post statuses/batch/read(BatchInputString payload, map<string|string[]> headers = {}, *PostCommunicationPreferencesV4StatusesBatchReadQueries queries) returns BatchResponsePublicStatusBulkResponse|BatchResponsePublicStatusBulkResponseWithErrors|error {
+    remote isolated function postCommunicationPreferencesV4StatusesBatchRead(BatchInputString payload, map<string|string[]> headers = {}, *PostCommunicationPreferencesV4StatusesBatchReadQueries queries) returns BatchResponsePublicStatusBulkResponse|BatchResponsePublicStatusBulkResponseWithErrors|error {
         string resourcePath = string `/statuses/batch/read`;
+        map<anydata> headerValues = {...headers};
+        if self.apiKeyConfig is ApiKeysConfig {
+            headerValues["private-app"] = self.apiKeyConfig?.private\-app;
+        }
+        resourcePath = resourcePath + check getPathForQueryParam(queries);
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        http:Request request = new;
+        json jsonBody = payload.toJson();
+        request.setPayload(jsonBody, "application/json");
+        return self.clientEp->post(resourcePath, request, httpHeaders);
+    }
+
+    # Batch unsubscribe contacts from all subscriptions
+    #
+    # + headers - Headers to be sent with the request 
+    # + queries - Queries to be sent with the request 
+    # + return - successful operation 
+    remote isolated function postCommunicationPreferencesV4StatusesBatchUnsubscribeAll(BatchInputString payload, map<string|string[]> headers = {}, *PostCommunicationPreferencesV4StatusesBatchUnsubscribeAllQueries queries) returns BatchResponsePublicBulkOptOutFromAllResponse|error {
+        string resourcePath = string `/statuses/batch/unsubscribe-all`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
             headerValues["private-app"] = self.apiKeyConfig?.private\-app;
@@ -159,7 +154,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - successful operation 
-    resource isolated function post statuses/batch/unsubscribe\-all/read(BatchInputString payload, map<string|string[]> headers = {}, *PostCommunicationPreferencesV4StatusesBatchUnsubscribeAllReadQueries queries) returns BatchResponsePublicWideStatusBulkResponse|BatchResponsePublicWideStatusBulkResponseWithErrors|error {
+    remote isolated function postCommunicationPreferencesV4StatusesBatchUnsubscribeAllRead(BatchInputString payload, map<string|string[]> headers = {}, *PostCommunicationPreferencesV4StatusesBatchUnsubscribeAllReadQueries queries) returns BatchResponsePublicWideStatusBulkResponse|BatchResponsePublicWideStatusBulkResponseWithErrors|error {
         string resourcePath = string `/statuses/batch/unsubscribe-all/read`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
@@ -177,7 +172,7 @@ public isolated client class Client {
     #
     # + headers - Headers to be sent with the request 
     # + return - successful operation 
-    resource isolated function post statuses/batch/write(BatchInputPublicStatusRequest payload, map<string|string[]> headers = {}) returns BatchResponsePublicStatus|error {
+    remote isolated function postCommunicationPreferencesV4StatusesBatchWrite(BatchInputPublicStatusRequest payload, map<string|string[]> headers = {}) returns BatchResponsePublicStatus|error {
         string resourcePath = string `/statuses/batch/write`;
         map<anydata> headerValues = {...headers};
         if self.apiKeyConfig is ApiKeysConfig {
@@ -187,6 +182,42 @@ public isolated client class Client {
         http:Request request = new;
         json jsonBody = payload.toJson();
         request.setPayload(jsonBody, "application/json");
+        return self.clientEp->post(resourcePath, request, httpHeaders);
+    }
+
+    # Update a contact's subscription status
+    #
+    # + subscriberIdString - The contact's email address.
+    # + headers - Headers to be sent with the request 
+    # + return - successful operation 
+    remote isolated function postCommunicationPreferencesV4StatusesSubscriberidstring(string subscriberIdString, PartialPublicStatusRequest payload, map<string|string[]> headers = {}) returns ActionResponseWithResultsPublicStatus|error {
+        string resourcePath = string `/statuses/${getEncodedUri(subscriberIdString)}`;
+        map<anydata> headerValues = {...headers};
+        if self.apiKeyConfig is ApiKeysConfig {
+            headerValues["private-app-legacy"] = self.apiKeyConfig?.private\-app\-legacy;
+        }
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        http:Request request = new;
+        json jsonBody = payload.toJson();
+        request.setPayload(jsonBody, "application/json");
+        return self.clientEp->post(resourcePath, request, httpHeaders);
+    }
+
+    # Unsubscribe a contact from all subscriptions
+    #
+    # + subscriberIdString - The contact's email address.
+    # + headers - Headers to be sent with the request 
+    # + queries - Queries to be sent with the request 
+    # + return - successful operation 
+    remote isolated function postCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAll(string subscriberIdString, map<string|string[]> headers = {}, *PostCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAllQueries queries) returns ActionResponseWithResultsPublicStatus|error {
+        string resourcePath = string `/statuses/${getEncodedUri(subscriberIdString)}/unsubscribe-all`;
+        map<anydata> headerValues = {...headers};
+        if self.apiKeyConfig is ApiKeysConfig {
+            headerValues["private-app-legacy"] = self.apiKeyConfig?.private\-app\-legacy;
+        }
+        resourcePath = resourcePath + check getPathForQueryParam(queries);
+        map<string|string[]> httpHeaders = getMapForHeaders(headerValues);
+        http:Request request = new;
         return self.clientEp->post(resourcePath, request, httpHeaders);
     }
 }
