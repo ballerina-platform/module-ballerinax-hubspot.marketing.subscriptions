@@ -4,11 +4,7 @@ This use case demonstrates how email preferences for event attendees can be mana
 
 # Prerequisites
 
-## 1. Setup HubSpot developer account
-
-Refer to the [Setup Guide](https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/tree/main/README.md) to obtain necessary credentials.
-
-## 2. Configuration
+## Configuration
 
 Create a Config.toml file in the example's root directory and, provide your HubSpot account related configurations as follows:
 
