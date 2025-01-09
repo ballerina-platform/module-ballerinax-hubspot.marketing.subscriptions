@@ -41,8 +41,9 @@ final int:Signed32 testSubscriptionId = 530858989;
 }
 
 isolated function testGetCommunicationPreferencesbySubscriberId() returns error? {
-    ActionResponseWithResultsPublicStatus response = check hubspot->/statuses/[testSubscriberUserId](channel = "EMAIL");
-    test:assertTrue(response?.results.length() !is 0);
+    ActionResponseWithResultsPublicStatus response = check hubspot->getCommunicationPreferencesV4StatusesSubscriberidstring(testSubscriberUserId, channel = "EMAIL");
+    test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
+
 }
 
 @test:Config {
@@ -50,15 +51,15 @@ isolated function testGetCommunicationPreferencesbySubscriberId() returns error?
 }
 
 isolated function testPostCommunicationPreferencesbySubscriberId() returns error? {
-    ActionResponseWithResultsPublicStatus response = check hubspot->/statuses/[testSubscriberUserId].post(
+    ActionResponseWithResultsPublicStatus response = check hubspot->postCommunicationPreferencesV4StatusesSubscriberidstring(testSubscriberUserId,
         payload = {
-            channel: "EMAIL",
-            statusState: "SUBSCRIBED",
-            subscriptionId: testSubscriptionId
+        channel: "EMAIL",
+        statusState: "SUBSCRIBED",
+        subscriptionId: testSubscriptionId
 
-        }
+    }
     );
-    test:assertTrue(response?.results.length() !is 0);
+    test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
 @test:Config {
@@ -66,8 +67,8 @@ isolated function testPostCommunicationPreferencesbySubscriberId() returns error
 }
 
 isolated function testGetUnsubscribedStatusbySubscriberId() returns error? {
-    ActionResponseWithResultsPublicWideStatus response = check hubspot->/statuses/[testSubscriberUserId]/unsubscribe\-all(channel = "EMAIL");
-    test:assertTrue(response?.results.length() !is 0);
+    ActionResponseWithResultsPublicWideStatus response = check hubspot->getCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAll(testSubscriberUserId, channel = "EMAIL");
+    test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
 @test:Config {
@@ -78,8 +79,8 @@ isolated function testPostBatchUnsubscribeAll() returns error? {
     BatchInputString payload = {
         inputs: [testSubscriberUserId]
     };
-    BatchResponsePublicWideStatusBulkResponse response = check hubspot->/statuses/batch/unsubscribe\-all/read.post(payload, channel = "EMAIL");
-    test:assertTrue(response?.results.length() !is 0);
+    BatchResponsePublicWideStatusBulkResponse response = check hubspot->postCommunicationPreferencesV4StatusesBatchUnsubscribeAllRead(payload, channel = "EMAIL");
+    test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
 @test:Config {
@@ -91,8 +92,8 @@ isolated function testPostCommunicationPreferencesBatchRead() returns error? {
         inputs: [testSubscriberUserId]
     };
 
-    BatchResponsePublicStatusBulkResponse response = check hubspot->/statuses/batch/read.post(payload, channel = "EMAIL");
-    test:assertTrue(response?.results.length() !is 0);
+    BatchResponsePublicStatusBulkResponse response = check hubspot->postCommunicationPreferencesV4StatusesBatchRead(payload, channel = "EMAIL");
+    test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
 @test:Config {
@@ -110,8 +111,8 @@ isolated function testPostCommunicationPreferencesBatchWrite() returns error? {
         inputs: [request]
     };
 
-    BatchResponsePublicStatus response = check hubspot->/statuses/batch/write.post(payload);
-    test:assertTrue(response?.results.length() !is 0);
+    BatchResponsePublicStatus response = check hubspot->postCommunicationPreferencesV4StatusesBatchWrite(payload);
+    test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
 @test:Config {
@@ -119,8 +120,8 @@ isolated function testPostCommunicationPreferencesBatchWrite() returns error? {
 }
 
 isolated function testPostUnsubscribeAllbySubscriberId() returns error? {
-    ActionResponseWithResultsPublicStatus response = check hubspot->/statuses/[testSubscriberUserId]/unsubscribe\-all.post(channel = "EMAIL");
-    test:assertTrue(response?.results.length() is 0);
+    ActionResponseWithResultsPublicStatus response = check hubspot->postCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAll(testSubscriberUserId, channel = "EMAIL");
+    test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
 @test:Config {
@@ -128,7 +129,19 @@ isolated function testPostUnsubscribeAllbySubscriberId() returns error? {
 }
 
 isolated function testGetSubscriptionStatusDefinitions() returns error? {
-    ActionResponseWithResultsSubscriptionDefinition response = check hubspot->/definitions;
-    test:assertTrue(response?.results.length() !is 0);
+    ActionResponseWithResultsSubscriptionDefinition response = check hubspot->getCommunicationPreferencesV4Definitions();
+    test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
+}
+
+@test:Config {
+    groups: ["live_tests", "mock_tests"]
+}
+
+isolated function testPostBatchUnsubscribeAllRead() returns error? {
+    BatchInputString payload = {
+        inputs: [testSubscriberUserId]
+    };
+    BatchResponsePublicWideStatusBulkResponse response = check hubspot->postCommunicationPreferencesV4StatusesBatchUnsubscribeAllRead(payload, channel = "EMAIL");
+    test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 

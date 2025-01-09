@@ -20,7 +20,6 @@ import ballerina/log;
 listener http:Listener httpListener = new (9090);
 
 http:Service mockService = service object {
-
     # Retrieve all subscription status definitions
     # + return - successful operation 
     resource isolated function get definitions() returns ActionResponseWithResultsSubscriptionDefinition|http:Response {
