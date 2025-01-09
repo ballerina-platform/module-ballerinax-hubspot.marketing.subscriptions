@@ -30,8 +30,7 @@ OAuth2RefreshTokenGrantConfig auth = {
     credentialBearer: oauth2:POST_BODY_BEARER // this line should be added to create auth object.
 };
 
-ConnectionConfig config = {auth: auth};
-final Client hubspot = check new Client(config, serviceUrl);
+final Client hubspot = check new Client({auth});
 
 final string testSubscriberUserId = "bh@hubspot.com";
 final int:Signed32 testSubscriptionId = 530858989;
