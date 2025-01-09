@@ -4,51 +4,52 @@ HubSpot is an AI-powered customer relationship management (CRM) platform.
 
 The `ballerinax/hubspot.marketing.subscriptions` offers APIs to connect and interact with the [HubSpot API for Marketing Subscriptions](https://developers.hubspot.com/docs/reference/api/marketing/subscriptions#get-%2Fcommunication-preferences%2Fv4%2Fstatuses%2F%7Bsubscriberidstring%7D) endpoints, specifically based on the [HubSpot Marketing Events API v3 OpenAPI spec](https://github.com/HubSpot/HubSpot-public-api-spec-collection/blob/13f888343a8ec443d95de2c12393015ba3391ac6/PublicApiSpecs/Communication%20Preferences/Subscriptions/Rollouts/176901/v4/subscriptions.json).
 
+Use the subscriptions API to programmatically subscribe or unsubscribe contacts from your email subscription types, or unsubscribe a contact from all email communication. These APIs also provide support for business units.
+
 
 ## Setup guide
 
-To use the HubSpot Marketing Subscriptions Connector, you must have access to the HubSpot API through a HubSpot developer account and a HubSpot App under it. Therefore you need to register for a developer account at HubSpot if you don't have one already.
+To use the HubSpot Marketing Subscriptions Connector, you must have access to the HubSpot API via a HubSpot developer account and a HubSpot App associated with it. If you don't already have one, you need to register for a developer account at HubSpot.
 
 ### Step 1: Create/Login to a HubSpot Developer Account
 
-If you have an account already, go to the [HubSpot developer portal](https://app.hubspot.com/)
+If you already have an account, go to the [HubSpot developer portal](https://app.hubspot.com/)
 
-If you don't have a HubSpot Developer Account you can sign up to a free account [here](https://developers.hubspot.com/get-started)
+If you don't have a HubSpot Developer Account, you can sign up to a free account [here](https://developers.hubspot.com/get-started)
 
 ### Step 2 (Optional): Create a [Developer Test Account](https://developers.hubspot.com/beta-docs/getting-started/account-types#developer-test-accounts) under your account
 
 Within app developer accounts, you can create developer test accounts to test apps and integrations without affecting any real HubSpot data.
 
-**Note:** These accounts are only for development and testing purposes. In production you should not use Developer Test Accounts.
+**Note:** _These accounts are intended solely for development and testing purposes and should not be used in production environments._
 
-1. Go to Test Account section from the left sidebar.
+1. Navigate to 'Test Account' section from the left sidebar.
 
-   <img src="../docs/setup/resources/Test1.png" alt="Hubspot developer portal" style="width: 70%;">
+   ![Hubspot developer portal](../docs/setup/resources/Test1.png)
    
-2. Click Create developer test account.
+2. Click 'Create developer test account'.
 
-   <img src=../docs/setup/resources/Test2.png alt="Hubspot developer testacc" style="width: 70%;">
+   ![Hubspot developer portal](../docs/setup/resources/Test2.png)
 
-3. In the dialogue box, give a name to your test account and click create.
+3. In the dialog box, provide a name to your test account and click 'Create'.
 
-   <img src=../docs/setup/resources/Test3.png alt="Hubspot developer testacc3" style="width: 70%;">
+   ![Hubspot developer portal](../docs/setup/resources/Test3.png)
 
 ### Step 3: Create a HubSpot App under your account.
 
-1. In your developer account, navigate to the "Apps" section. Click on "Create App"
+1. In your developer account, navigate to the 'Apps' section. Click 'Create App'
 
-   <img src=../docs/setup/resources/Test4.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
+   ![Hubspot developer portal](../docs/setup/resources/Test4.png)
 
 2. Provide the necessary details, including the app name and description.
 
 ### Step 4: Configure the Authentication Flow.
 
-1. Move to the Auth Tab.
+1. Move to the 'Auth' Tab.
 
+   ![Hubspot developer portal](../docs/setup/resources/Test5.png)
 
-   <img src=../docs/setup/resources/Test5.png alt="Hubspot app creation 2 testacc3" style="width: 70%;">
-
-2. In the Scopes section, add the following scopes for your app using the "Add new scope" button.
+2. In the Scopes section, add the following scopes for your app by using the 'Add new scope' button.
 
    `communication_preferences.read_write`
 
@@ -56,21 +57,21 @@ Within app developer accounts, you can create developer test accounts to test ap
 
    `communication_preferences.statuses.batch.write`
 
-   <img src=../docs/setup/resources/Test6.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
+   ![Hubspot developer portal](../docs/setup/resources/Test6.png)
 
-4. Add your Redirect URI in the relevant section. You can also use `localhost` addresses for local development purposes. Click Create App.
+4. Add your Redirect URI in the appropriate section. You can also use _localhost_ addresses for local development purposes. Click 'Create App'.
 
-   <img src=../docs/setup/resources/Test7.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
+   ![Hubspot developer portal](../docs/setup/resources/Test7.png)
 
 ### Step 5: Get your Client ID and Client Secret
 
-- Navigate to the Auth section of your app. Make sure to save the provided Client ID and Client Secret.
+- Navigate to the 'Auth' section of your app. Make sure to save the provided Client ID and Client Secret.
 
-   <img src=../docs/setup/resources/Test8.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
+   ![Hubspot developer portal](../docs/setup/resources/Test8.png)
 
 ### Step 6: Setup Authentication Flow
 
-Before proceeding with the Quickstart, ensure you have obtained the Access Token using the following steps:
+Before proceeding with the Quickstart, make sure you have obtained the Access Token using the following steps:
 
 1. Create an authorization URL using the following format:
 
@@ -78,17 +79,17 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
    https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&scope=<YOUR_SCOPES>&redirect_uri=<YOUR_REDIRECT_URI>
    ```
 
-   Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>` and `<YOUR_SCOPES>` with your specific value.
+   Replace the **YOUR_CLIENT_ID**, **YOUR_REDIRECT_URI** and **YOUR_SCOPES** with your specific value.
 
-    **NOTE:** If you are using a `localhost` redirect url, make sure to have a listener running at the relevant port before executing the next step.
+    **NOTE:** _If you are using a localhost redirect url, make sure to have a listener running at the relevant port before executing the next step._
 
-2. Paste it in the browser and select your developer test account to intall the app when prompted.
+2. Paste it in the browser and select your developer test account to authorize the app when prompted.
 
-   <img src=../docs/setup/resources/Test9.png alt="Hubspot app creation 1 testacc3" style="width: 70%;">
+   ![Hubspot developer portal](../docs/setup/resources/Test9.png)
 
-3. A code will be displayed in the browser. Copy the code.
+3. An authorization code appears in the browser. Copy the code.
 
-4. Run the following curl command. Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI`> and `<YOUR_CLIENT_SECRET>` with your specific value. Use the code you received in the above step 3 as the `<CODE>`.
+4. Run the following curl command. Replace the **YOUR_CLIENT_ID**, **YOUR_REDIRECT_URI** and **YOUR_CLIENT_SECRET** with your specific value. Use the code you received in the step 3 above as the **CODE**.
 
    - Linux/macOS
 
@@ -108,7 +109,7 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
      --data 'grant_type=authorization_code&code=<CODE>&redirect_uri=<YOUR_REDIRECT_URI>&client_id=<YOUR_CLIENT_ID>&client_secret=<YOUR_CLIENT_SECRET>'
      ```
 
-   This command will return a JSON response containing access_token and refresh_token.
+   This command returns a JSON response containing access_token and refresh_token.
 
    ```json
    {
@@ -123,15 +124,15 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
 ## Quickstart
 
-To use the `HubSpot Marketing Subcriptions` connector in your Ballerina application, update the `.bal` file as follows:
+To use the **HubSpot Marketing Subscriptions** connector in your Ballerina application, update the `.bal` file as shown below:
 
 ### Step 1: Import the module
 
 Import the `hubspot.marketing.subscription` module and `oauth2` module.
 
 ```ballerina
-import ballerinax/hubspot.marketing.subscriptions as hsmsubscriptions;
 import ballerina/oauth2;
+import ballerinax/hubspot.marketing.subscriptions as hsmsubscriptions;
 ```
 
 ### Step 2: Instantiate a new connector
@@ -160,22 +161,31 @@ import ballerina/oauth2;
         }
     };
 
-    final hsmsubscriptions:Client hsmsubscriptions = check new (hsmsubscriptionsConfig, "https://api.hubapi.com/communication-preferences/v4");
+    final hsmsubscriptions:Client hsmsubscriptions = check new (hsmsubscriptionsConfig);
     ```
 
 ### Step 3: Invoke the connector operation
 
-Now, utilize the available connector operations. A sample usecase is shown below.
+Now, utilize the available connector operations. A sample use case is shown below.
 
 #### Get subscription preferences for a specific contact
 
 ```
 public function main() returns error? {
-    ActionResponseWithResultsPublicStatus response = check hubspot-> /communication\-preferences/v4/statuses/["senurim@wso2.com"](channel="EMAIL");
-    io:println(response);
+    getCommunicationPreferencesV4StatusesSubscriberidstring(subscriberUserId,channel = "EMAIL");
 }  
 ```
+### Step 4: Run the Ballerina application
+
+```
+bal run
+```
+
 
 ## Examples
 
-The `HubSpot Marketing Subscriptions` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/tree/main/examples/), covering the following use cases:
+The `HubSpot Marketing Subscriptions` connector provides practical examples that illustrate its usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/tree/main/examples/), which cover the following use cases:
+
+1. [Event-Based Email Preference Update](https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/tree/main/examples/event-based-email-preference-update) - Check and update email preferences for event attendees, ensuring post-event unsubscribed attendees are bulk resubscribed for future engagement.
+
+2. [Bulk Opt-Out of All Email Communication](https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/tree/main/examples/bulk-opt-out-of-email-communication) - Process a batch of opt-out requests to efficiently unsubscribe multiple customers from all email communications in bulk.

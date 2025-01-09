@@ -286,6 +286,78 @@
         } ]
       }
     },
+    "/statuses/batch/unsubscribe-all" : {
+      "post" : {
+        "tags" : [ "Subscription status" ],
+        "summary" : "Batch unsubscribe contacts from all subscriptions",
+        "description" : "Unsubscribe a set of contacts from all email subscriptions.",
+        "operationId" : "post-/communication-preferences/v4/statuses/batch/unsubscribe-all",
+        "parameters" : [ {
+          "name" : "businessUnitId",
+          "in" : "query",
+          "description" : "If you have the [business unit add-on](https://developers.hubspot.com/beta-docs/guides/api/settings/business-units-api), include this parameter to filter results by business unit ID. The default Account business unit will always use `0`.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        }, {
+          "name" : "verbose",
+          "in" : "query",
+          "description" : "Set to `true` to include the details of the updated subscription statuses in the response. Not including this parameter will result in an empty response.",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "boolean",
+            "default" : false
+          }
+        }, {
+          "name" : "channel",
+          "in" : "query",
+          "description" : "The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`.",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "EMAIL", "WHATSAPP", "SMS" ]
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BatchInputString"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BatchResponsePublicBulkOptOutFromAllResponse"
+                }
+              }
+            }
+          },
+          "default" : {
+            "$ref" : "#/components/responses/Error"
+          }
+        },
+        "security" : [ {
+          "private_apps" : [ "communication_preferences.statuses.batch.write" ]
+        }, {
+          "oauth2" : [ "communication_preferences.statuses.batch.write" ]
+        } ]
+      }
+    },
     
     "/definitions" : {
       "get" : {
