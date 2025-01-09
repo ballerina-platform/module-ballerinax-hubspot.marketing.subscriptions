@@ -1,6 +1,6 @@
 # Bulk Opt-Out of All Email Communication
 
-This use case demonstrates how the HubSpot Marketing Subscription API can be used to efficiently unsubscribe customers in bulk who have submitted opt-out requests for all email communication. This approach helps save time, ensures all requests are processed quickly, and improves overall customer experience by honoring their preferences.
+This use case demonstrates how the Ballerina HubSpot Marketing Subscription connector can efficiently handle bulk unsubscriptions for customers who have submitted opt-out requests for all email communication. This approach saves time, ensures prompt processing of requests, and enhances the overall customer experience by honoring their preferences.
 
 # Prerequisites
 
