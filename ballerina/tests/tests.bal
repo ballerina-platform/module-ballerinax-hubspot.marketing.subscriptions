@@ -141,6 +141,7 @@ isolated function testGetSubscriptionStatusDefinitions() returns error? {
 }
 
 @test:Config {
+    enable: isLiveServer,
     groups: ["live_tests"]
 }
 
