@@ -21,7 +21,6 @@ import ballerinax/hubspot.marketing.subscriptions as hsmsubscriptions;
 configurable string clientId = ?;
 configurable string clientSecret = ?;
 configurable string refreshToken = ?;
-configurable string serviceUrl = ?;
 
 // Configure the connection settings for HubSpot API using OAuth2
 final hsmsubscriptions:ConnectionConfig hsmsubscriptionsConfig = {
