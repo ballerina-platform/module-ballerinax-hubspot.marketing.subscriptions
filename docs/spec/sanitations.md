@@ -13,27 +13,26 @@ These changes are done in order to improve the overall usability, and as workaro
 
     - **Original**: ` https://api.hubspot.com `
     - **Updated**: ` https://api.hubapi.com/communication-preferences/v4 `
-    - This change is made to ensure that all API paths are relative to the URL 
+    - **Reason**:This change is made to ensure that all API paths are relative to the URL 
     (/communication-preferences/v4), which improves the consistency and usability of the APIs.
 
 2. Use `--nullable` option when generating the client using the Ballerina OpenAPI tool:
 
-    - The Hubspot API reference does not properly include the "nullable" property for some the request and response schemas.
-    - Therefore, the `--nullable` option is used as a precaution to avoid potential data-binding issues in the runtime, which generates all the request/response type fields with the support to handle null values.
-    - This workaround can be removed once [ballerina-platform/ballerina-library#4870](https://github.com/ballerina-platform/ballerina-library/issues/4870) is addressed.
+    - **Reason**: The Hubspot API reference does not properly include the "nullable" property for some the request and response schemas. Therefore, the `--nullable` option is used as a precaution to avoid potential data-binding issues in the runtime, which generates all the request/response type fields with the support to handle null values.
+    >**Note**: This workaround can be removed once [ballerina-platform/ballerina-library#4870](https://github.com/ballerina-platform/ballerina-library/issues/4870) is addressed.
 
 3. Update API Paths:
 
-   - **Original**: Paths included the version prefix in each endpoint 
+    - **Original**: Paths included the version prefix in each endpoint 
    (e.g., /communication-preferences/v4).
     - **Updated**: Paths are modified to remove the version prefix from the endpoints, as it is now included in the base URL. For example:
         - **Original**: ` /communication-preferences/v4/statuses/batch/read `
         - **Updated**: ` /statuses/batch/read `
-    - This modification simplifies the API paths, making them shorter and more readable. It also centralizes the versioning to the base URL, which is a common best practice.
+    - **Reason**: This modification simplifies the API paths, making them shorter and more readable. It also centralizes the versioning to the base URL, which is a common best practice.
 
 4. Remove required fields `errors` and `links` from `StandardError`:
 
-    - Although the HubSpot OpenAPI Specification marks these fields as required, the server returns payload-binding errors during runtime. To resolve this issue, these fields have been removed from the specification.
+    - **Reason**: Although the HubSpot OpenAPI Specification marks these fields as required, the server returns payload-binding errors during runtime. To resolve this issue, these fields have been removed from the specification.
 
 ## OpenAPI cli command
 
