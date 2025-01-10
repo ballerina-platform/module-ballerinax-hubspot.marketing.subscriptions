@@ -46,7 +46,8 @@ public function main() returns error? {
     };
 
     // Call the HubSpot API to get the subscription status for the users
-    hsmsubscriptions:BatchResponsePublicStatusBulkResponse subscriptionStatusResponse = check hsmsubscriptions->postCommunicationPreferencesV4StatusesBatchRead(payload, channel = "EMAIL");
+    hsmsubscriptions:BatchResponsePublicStatusBulkResponse subscriptionStatusResponse = check hsmsubscriptions->
+    postCommunicationPreferencesV4StatusesBatchRead(payload, channel = "EMAIL");
 
     foreach hsmsubscriptions:PublicStatusBulkResponse subscriberDetails in subscriptionStatusResponse.results {
         boolean alreadyOptedOut = true;
@@ -56,7 +57,8 @@ public function main() returns error? {
                 continue;
             } else {
                 // If the user is not unsubscribed, perform an action to unsubscribe from all emails     
-                hsmsubscriptions:ActionResponseWithResultsPublicWideStatus response = check hsmsubscriptions->getCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAll(subscriberDetails.subscriberIdString, channel = "EMAIL");
+                hsmsubscriptions:ActionResponseWithResultsPublicWideStatus response = check hsmsubscriptions->
+                getCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAll(subscriberDetails.subscriberIdString, channel = "EMAIL");
                 alreadyOptedOut = false;
                 io:println("User is successfully opted-out from all email subscriptions.");
                 break;

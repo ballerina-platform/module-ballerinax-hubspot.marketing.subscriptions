@@ -52,7 +52,7 @@ public function main() returns error? {
         hsmsubscriptions:ActionResponseWithResultsPublicStatus response = check hsmsubscriptions->getCommunicationPreferencesV4StatusesSubscriberidstring(subscriberUserId, channel = "EMAIL");
 
         foreach hsmsubscriptions:PublicStatus item in response.results {
-            // Check if the subscription ID matches the one we are interested in,If the user is unsubscribed, add them to the list of IDs to resubscribe
+            // Check if the subscription ID matches the one we are interested in, If the user is unsubscribed, add them to the list of IDs to resubscribe
             if (item.subscriptionId == subscriptionId) && (item.status == "UNSUBSCRIBED") {
                 subscriberIdString.push(subscriberUserId);
 
@@ -83,6 +83,5 @@ public function main() returns error? {
         // Send the batch request to HubSpot API to update the subscription statuses
         hsmsubscriptions:BatchResponsePublicStatus response = check hsmsubscriptions->postCommunicationPreferencesV4StatusesBatchWrite(payload);
         io:println("Users are successfully subscribed to this service!");
-
     }
 }

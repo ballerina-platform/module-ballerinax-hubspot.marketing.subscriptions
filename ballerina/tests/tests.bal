@@ -17,7 +17,7 @@
 import ballerina/oauth2;
 import ballerina/test;
 
-configurable boolean isLiveServer = ?;
+final boolean isLiveServer = false; // When running against the live server set this variable to true
 configurable string clientId = ?;
 configurable string clientSecret = ?;
 configurable string refreshToken = ?;
@@ -41,7 +41,8 @@ final int:Signed32 testSubscriptionId = 530858989;
 
 isolated function testGetCommunicationPreferencesbySubscriberId() returns error? {
     ActionResponseWithResultsPublicStatus response = check hubspot
-    ->getCommunicationPreferencesV4StatusesSubscriberidstring(testSubscriberUserId, channel = "EMAIL");
+    ->getCommunicationPreferencesV4StatusesSubscriberidstring
+    (testSubscriberUserId, channel = "EMAIL");
     test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 
 }
@@ -52,7 +53,8 @@ isolated function testGetCommunicationPreferencesbySubscriberId() returns error?
 
 isolated function testPostCommunicationPreferencesbySubscriberId() returns error? {
     ActionResponseWithResultsPublicStatus response = check hubspot
-    ->postCommunicationPreferencesV4StatusesSubscriberidstring(testSubscriberUserId,
+    ->postCommunicationPreferencesV4StatusesSubscriberidstring
+    (testSubscriberUserId,
         payload = {
         channel: "EMAIL",
         statusState: "SUBSCRIBED",
@@ -82,7 +84,8 @@ isolated function testPostBatchUnsubscribeAll() returns error? {
         inputs: [testSubscriberUserId]
     };
     BatchResponsePublicWideStatusBulkResponse response = check hubspot
-    ->postCommunicationPreferencesV4StatusesBatchUnsubscribeAllRead(payload, channel = "EMAIL");
+    ->postCommunicationPreferencesV4StatusesBatchUnsubscribeAllRead
+    (payload, channel = "EMAIL");
     test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
@@ -150,7 +153,8 @@ isolated function testPostBatchUnsubscribeAllRead() returns error? {
         inputs: [testSubscriberUserId]
     };
     BatchResponsePublicWideStatusBulkResponse response = check hubspot
-    ->postCommunicationPreferencesV4StatusesBatchUnsubscribeAllRead(payload, channel = "EMAIL");
+    ->postCommunicationPreferencesV4StatusesBatchUnsubscribeAllRead
+    (payload, channel = "EMAIL");
     test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
