@@ -99,7 +99,8 @@ isolated function testPostCommunicationPreferencesBatchRead() returns error? {
     };
 
     BatchResponsePublicStatusBulkResponse response = check hubspot
-    ->postCommunicationPreferencesV4StatusesBatchRead(payload, channel = "EMAIL");
+    ->postCommunicationPreferencesV4StatusesBatchRead
+    (payload, channel = "EMAIL");
     test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
