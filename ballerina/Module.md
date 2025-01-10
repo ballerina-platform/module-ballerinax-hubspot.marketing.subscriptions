@@ -73,13 +73,13 @@ Before proceeding with the Quickstart, make sure you have obtained the Access To
 
 1. Create an authorization URL using the following format:
 
-   ```read
+   ```
    https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&scope=<YOUR_SCOPES>&redirect_uri=<YOUR_REDIRECT_URI>
    ```
 
    Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>` and `<YOUR_CLIENT_SECRET>` with your specific value.
 
-    >**NOTE:** If you are using a localhost redirect url, make sure to have a listener running at the relevant port before executing the next step.
+    >**Note:** If you are using a localhost redirect url, make sure to have a listener running at the relevant port before executing the next step.
 
 2. Paste it in the browser and select your developer test account to authorize the app when prompted.
 
@@ -170,7 +170,8 @@ Now, utilize the available connector operations. A sample use case is shown belo
 
 ```
 public function main() returns error? {
-    hsmsubscriptions: ActionResponseWithResultsPublicWideStatus response = getCommunicationPreferencesV4StatusesSubscriberidstring(subscriberUserId,channel = "EMAIL");
+    hsmsubscriptions: ActionResponseWithResultsPublicWideStatus response = getCommunicationPreferencesV4StatusesSubscriberidstring
+    (subscriberUserId,channel = "EMAIL");
 }  
 
 ```
@@ -179,7 +180,6 @@ public function main() returns error? {
 ```
 bal run
 ```
-
 
 ## Examples
 
