@@ -1,14 +1,22 @@
 # Examples
 
-The `ballerinax/hubspot.marketing.subscriptions` connector provides practical examples illustrating usage in various scenarios.
+The `HubSpot Marketing Subscriptions` connector provides practical examples that illustrate its usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/tree/main/examples/), which cover the following use cases:
 
-[//]: # (TODO: Add examples)
-1. 
-2. 
+1. [Event-Based Email Preference Update](https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/tree/main/examples/event-based-email-preference-update) - Check and update email preferences for event attendees, ensuring post-event unsubscribed attendees are bulk resubscribed for future engagement.
+
+2. [Bulk Opt-Out of All Email Communication](https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/tree/main/examples/bulk-opt-out-of-email-communication) - Process a batch of opt-out requests to efficiently unsubscribe multiple customers from all email communications in bulk.
 
 ## Prerequisites
 
-[//]: # (TODO: Add prerequisites)
+1. Generate HubSpot credentials to authenticate the connector as described in the [Setup Guide](https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/blob/main/README.md).
+
+2. For each example, create a `Config.toml` file the related configuration. Here's an example of how your `Config.toml` file should look:
+
+    ```toml
+    clientId= "<clientId>"
+    clientSecret= "<clientSecret>"
+    refreshToken= "<refreshToken>"
+    ```
 
 ## Running an example
 

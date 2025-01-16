@@ -5,12 +5,12 @@ name = "hubspot.marketing.subscriptions"
 version = "@toml.version@"
 license = ["Apache-2.0"]
 authors = ["Ballerina"]
-keywords = [] # TODO: Add keywords
-# icon = "icon.png" # TODO: Add icon
+keywords = ["hubspot", "marketing", "subscriptions"]
+icon = "icon.png" 
 repository = "https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions"
 
 [build-options]
 observabilityIncluded = true
 
-[platform.java21]
+[platform.java17]
 graalvmCompatible = true
