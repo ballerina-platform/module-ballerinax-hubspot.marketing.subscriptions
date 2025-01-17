@@ -19,12 +19,11 @@ import ballerina/test;
 import ballerina/os;
 
 final boolean isLiveServer = false; // When running against the live server set this variable to true
+
 final string clientId = os:getEnv("HUBSPOT_CLIENT_ID");
 final string clientSecret = os:getEnv("HUBSPOT_CLIENT_SECRET");
 final string refreshToken = os:getEnv("HUBSPOT_REFRESH_TOKEN");
 final string serviceUrl = isLiveServer ? "https://api.hubapi.com/communication-preferences/v4" : "http://localhost:9090";
-
-
 
 final Client hubspot = check initClient();
 
