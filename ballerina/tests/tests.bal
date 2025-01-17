@@ -24,9 +24,9 @@ configurable string refreshToken = ?;
 final string serviceUrl = isLiveServer ? "https://api.hubapi.com/communication-preferences/v4" : "http://localhost:9090";
 
 OAuth2RefreshTokenGrantConfig auth = {
-    clientId: clientId,
-    clientSecret: clientSecret,
-    refreshToken: refreshToken,
+    clientId,
+    clientSecret,
+    refreshToken,
     credentialBearer: oauth2:POST_BODY_BEARER // this line should be added to create auth object.
 };
 
@@ -36,7 +36,8 @@ final string testSubscriberUserId = "bh@hubspot.com";
 final int:Signed32 testSubscriptionId = 530858989;
 
 @test:Config {
-    groups: ["live_tests", "mock_tests"]
+    enable: isLiveServer,
+    groups: ["live_tests"]
 }
 
 isolated function testGetCommunicationPreferencesbySubscriberId() returns error? {
@@ -44,11 +45,11 @@ isolated function testGetCommunicationPreferencesbySubscriberId() returns error?
     ->getCommunicationPreferencesV4StatusesSubscriberidstring
     (testSubscriberUserId, channel = "EMAIL");
     test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
-
 }
 
 @test:Config {
-    groups: ["live_tests", "mock_tests"]
+    enable: isLiveServer,
+    groups: ["live_tests"]
 }
 
 isolated function testPostCommunicationPreferencesbySubscriberId() returns error? {
@@ -66,7 +67,8 @@ isolated function testPostCommunicationPreferencesbySubscriberId() returns error
 }
 
 @test:Config {
-    groups: ["live_tests", "mock_tests"]
+    enable: isLiveServer,
+    groups: ["live_tests"]
 }
 
 isolated function testGetUnsubscribedStatusbySubscriberId() returns error? {
@@ -76,7 +78,8 @@ isolated function testGetUnsubscribedStatusbySubscriberId() returns error? {
 }
 
 @test:Config {
-    groups: ["live_tests", "mock_tests"]
+    enable: isLiveServer,
+    groups: ["live_tests"]
 }
 
 isolated function testPostBatchUnsubscribeAll() returns error? {
@@ -90,7 +93,8 @@ isolated function testPostBatchUnsubscribeAll() returns error? {
 }
 
 @test:Config {
-    groups: ["live_tests", "mock_tests"]
+    enable: isLiveServer,
+    groups: ["live_tests"]
 }
 
 isolated function testPostCommunicationPreferencesBatchRead() returns error? {
@@ -105,7 +109,8 @@ isolated function testPostCommunicationPreferencesBatchRead() returns error? {
 }
 
 @test:Config {
-    groups: ["live_tests", "mock_tests"]
+    enable: isLiveServer,
+    groups: ["live_tests"]
 }
 
 isolated function testPostCommunicationPreferencesBatchWrite() returns error? {
@@ -125,7 +130,8 @@ isolated function testPostCommunicationPreferencesBatchWrite() returns error? {
 }
 
 @test:Config {
-    groups: ["live_tests", "mock_tests"]
+    enable: isLiveServer,
+    groups: ["live_tests"]
 }
 
 isolated function testPostUnsubscribeAllbySubscriberId() returns error? {
@@ -135,7 +141,8 @@ isolated function testPostUnsubscribeAllbySubscriberId() returns error? {
 }
 
 @test:Config {
-    groups: ["live_tests", "mock_tests"]
+    enable: isLiveServer,
+    groups: ["live_tests"]
 }
 
 isolated function testGetSubscriptionStatusDefinitions() returns error? {
