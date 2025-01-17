@@ -14,45 +14,36 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/oauth2;
 import ballerina/test;
 
-final boolean isLiveServer = false; // When running against the live server set this variable to true
-configurable string clientId = ?;
-configurable string clientSecret = ?;
-configurable string refreshToken = ?;
-final string serviceUrl = isLiveServer ? "https://api.hubapi.com/communication-preferences/v4" : "http://localhost:9090";
+final Client mockClient = check new (
+    {
+        auth: {
+            token: "test-token" // This approach eliminates the need for the client to make additional server requests for token validation, such as a refresh token request in the OAuth2 flow.
+        }
+    }, "http://localhost:9090"
+);
 
-OAuth2RefreshTokenGrantConfig auth = {
-    clientId,
-    clientSecret,
-    refreshToken,
-    credentialBearer: oauth2:POST_BODY_BEARER // this line should be added to create auth object.
-};
-
-final Client hubspot = check new Client({auth}, serviceUrl);
-
-final string testSubscriberUserId = "bh@hubspot.com";
-final int:Signed32 testSubscriptionId = 530858989;
+final string mockTestSubscriberUserId = "bh@hubspot.com";
+final int:Signed32 mockTestSubscriptionId = 530858989;
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_tests"]
+    groups: ["mock_tests"]
 }
 
-isolated function testGetCommunicationPreferencesbySubscriberId() returns error? {
+isolated function mockTestGetCommunicationPreferencesbySubscriberId() returns error? {
     ActionResponseWithResultsPublicStatus response = check hubspot
     ->getCommunicationPreferencesV4StatusesSubscriberidstring
     (testSubscriberUserId, channel = "EMAIL");
     test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
+
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_tests"]
+    groups: ["mock_tests"]
 }
 
-isolated function testPostCommunicationPreferencesbySubscriberId() returns error? {
+isolated function mockTestPostCommunicationPreferencesbySubscriberId() returns error? {
     ActionResponseWithResultsPublicStatus response = check hubspot
     ->postCommunicationPreferencesV4StatusesSubscriberidstring
     (testSubscriberUserId,
@@ -63,41 +54,41 @@ isolated function testPostCommunicationPreferencesbySubscriberId() returns error
 
     }
     );
+
     test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_tests"]
+    groups: ["mock_tests"]
 }
 
-isolated function testGetUnsubscribedStatusbySubscriberId() returns error? {
+isolated function mockTestGetUnsubscribedStatusbySubscriberId() returns error? {
     ActionResponseWithResultsPublicWideStatus response = check hubspot
     ->getCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAll(testSubscriberUserId, channel = "EMAIL");
+
     test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_tests"]
+    groups: ["mock_tests"]
 }
 
-isolated function testPostBatchUnsubscribeAll() returns error? {
+isolated function mockTestPostBatchUnsubscribeAll() returns error? {
     BatchInputString payload = {
         inputs: [testSubscriberUserId]
     };
     BatchResponsePublicWideStatusBulkResponse response = check hubspot
     ->postCommunicationPreferencesV4StatusesBatchUnsubscribeAllRead
     (payload, channel = "EMAIL");
+
     test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_tests"]
+    groups: ["mock_tests"]
 }
 
-isolated function testPostCommunicationPreferencesBatchRead() returns error? {
+isolated function mockTestPostCommunicationPreferencesBatchRead() returns error? {
     BatchInputString payload = {
         inputs: [testSubscriberUserId]
     };
@@ -105,15 +96,15 @@ isolated function testPostCommunicationPreferencesBatchRead() returns error? {
     BatchResponsePublicStatusBulkResponse response = check hubspot
     ->postCommunicationPreferencesV4StatusesBatchRead
     (payload, channel = "EMAIL");
+
     test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_tests"]
+    groups: ["mock_tests"]
 }
 
-isolated function testPostCommunicationPreferencesBatchWrite() returns error? {
+isolated function mockTestPostCommunicationPreferencesBatchWrite() returns error? {
     PublicStatusRequest request = {
         statusState: "SUBSCRIBED",
         channel: "EMAIL",
@@ -126,43 +117,27 @@ isolated function testPostCommunicationPreferencesBatchWrite() returns error? {
 
     BatchResponsePublicStatus response = check hubspot
     ->postCommunicationPreferencesV4StatusesBatchWrite(payload);
+
     test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_tests"]
+    groups: ["mock_tests"]
 }
 
-isolated function testPostUnsubscribeAllbySubscriberId() returns error? {
+isolated function mockTestPostUnsubscribeAllbySubscriberId() returns error? {
     ActionResponseWithResultsPublicStatus response = check hubspot
     ->postCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAll(testSubscriberUserId, channel = "EMAIL");
     test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
 @test:Config {
-    enable: isLiveServer,
-    groups: ["live_tests"]
+    groups: ["mock_tests"]
 }
 
-isolated function testGetSubscriptionStatusDefinitions() returns error? {
+isolated function mockTestGetSubscriptionStatusDefinitions() returns error? {
     ActionResponseWithResultsSubscriptionDefinition response = check hubspot
     ->getCommunicationPreferencesV4Definitions();
-    test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
-}
-
-@test:Config {
-    enable: isLiveServer,
-    groups: ["live_tests"]
-}
-
-isolated function testPostBatchUnsubscribeAllRead() returns error? {
-    BatchInputString payload = {
-        inputs: [testSubscriberUserId]
-    };
-    BatchResponsePublicWideStatusBulkResponse response = check hubspot
-    ->postCommunicationPreferencesV4StatusesBatchUnsubscribeAllRead
-    (payload, channel = "EMAIL");
     test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 

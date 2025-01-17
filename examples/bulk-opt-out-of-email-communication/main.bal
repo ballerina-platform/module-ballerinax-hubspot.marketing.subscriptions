@@ -18,13 +18,13 @@ import ballerina/io;
 import ballerina/oauth2;
 import ballerinax/hubspot.marketing.subscriptions as hsmsubscriptions;
 
-// Configuration for the hsmsubscriptions client
+// Configuration for the hsmSubscriptions client
 configurable string clientId = ?;
 configurable string clientSecret = ?;
 configurable string refreshToken = ?;
 
 // Configure the connection settings for HubSpot API using OAuth2
-final hsmsubscriptions:ConnectionConfig hsmsubscriptionsConfig = {
+final hsmsubscriptions:ConnectionConfig hsmSubscriptionsConfig = {
     auth: {
         clientId,
         clientSecret,
@@ -34,7 +34,7 @@ final hsmsubscriptions:ConnectionConfig hsmsubscriptionsConfig = {
 };
 
 // Create a client object to interact with the HubSpot Marketing Subscriptions API
-final hsmsubscriptions:Client hsmsubscriptions = check new (hsmsubscriptionsConfig);
+final hsmsubscriptions:Client hsmSubscriptions = check new (hsmSubscriptionsConfig);
 
 // An array of subscriber user IDs to be processed
 final string[] subscriberUserIdArray = ["bh@hubspot.com"]; // Example subscriber email (can be expanded)
@@ -46,7 +46,7 @@ public function main() returns error? {
     };
 
     // Call the HubSpot API to get the subscription status for the users
-    hsmsubscriptions:BatchResponsePublicStatusBulkResponse subscriptionStatusResponse = check hsmsubscriptions->
+    hsmsubscriptions:BatchResponsePublicStatusBulkResponse subscriptionStatusResponse = check hsmSubscriptions->
     postCommunicationPreferencesV4StatusesBatchRead(payload, channel = "EMAIL");
 
     foreach hsmsubscriptions:PublicStatusBulkResponse subscriberDetails in subscriptionStatusResponse.results {
@@ -57,15 +57,15 @@ public function main() returns error? {
                 continue;
             } else {
                 // If the user is not unsubscribed, perform an action to unsubscribe from all emails     
-                hsmsubscriptions:ActionResponseWithResultsPublicWideStatus response = check hsmsubscriptions->
+                hsmsubscriptions:ActionResponseWithResultsPublicWideStatus _ = check hsmSubscriptions->
                 getCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAll(subscriberDetails.subscriberIdString, channel = "EMAIL");
                 alreadyOptedOut = false;
-                io:println("User is successfully opted-out from all email subscriptions.");
+                io:println(subscriberDetails.subscriberIdString, ": User is successfully opted-out from all email subscriptions.");
                 break;
             }
         }
-        if (alreadyOptedOut) {
-            io:println("User is already opted-out of all email subscriptions.");
+        if alreadyOptedOut {
+            io:println(subscriberDetails.subscriberIdString, ": User is already opted-out of all email subscriptions.");
         }
     }
 }

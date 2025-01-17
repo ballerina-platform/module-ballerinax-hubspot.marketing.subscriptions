@@ -17,9 +17,9 @@ If you already have an account, go to the [HubSpot developer portal](https://app
 
 If you don't have a HubSpot Developer Account, you can sign up to a free account [here](https://developers.hubspot.com/get-started).
 
-### Step 2 (Optional): Create a [Developer Test Account](https://developers.hubspot.com/beta-docs/getting-started/account-types#developer-test-accounts) under your account
+### Step 2 (Optional): Create a Developer Test Account under your account
 
-Within app developer accounts, you can create developer test accounts to test apps and integrations without affecting any real HubSpot data.
+Within app developer accounts, you can create a [Developer Test Account](https://developers.hubspot.com/beta-docs/getting-started/account-types#developer-test-accounts) to test apps and integrations without affecting any real HubSpot data.
 
 >**Note:** These accounts are intended solely for development and testing purposes and should not be used in production environments.
 
@@ -150,7 +150,7 @@ import ballerinax/hubspot.marketing.subscriptions as hsmsubscriptions;
     configurable string clientSecret = ?;
     configurable string refreshToken = ?;
 
-    final hsmsubscriptions:ConnectionConfig hsmsubscriptionsConfig = {
+    final hsmsubscriptions:ConnectionConfig hsmSubscriptionsConfig = {
         auth : {
             clientId,
             clientSecret,
@@ -159,7 +159,7 @@ import ballerinax/hubspot.marketing.subscriptions as hsmsubscriptions;
         }
     };
 
-    final hsmsubscriptions:Client hsmsubscriptions = check new (hsmsubscriptionsConfig);
+    final hsmsubscriptions:Client hsmSubscriptions = check new (hsmSubscriptionsConfig);
     ```
 
 ### Step 3: Invoke the connector operation
@@ -170,7 +170,7 @@ Now, utilize the available connector operations. A sample use case is shown belo
 
 ```
 public function main() returns error? {
-    hsmsubscriptions: ActionResponseWithResultsPublicWideStatus response = getCommunicationPreferencesV4StatusesSubscriberidstring
+    hsmsubscriptions: ActionResponseWithResultsPublicWideStatus response = check hsmSubscriptions->getCommunicationPreferencesV4StatusesSubscriberidstring
     (subscriberUserId,channel = "EMAIL");
 }  
 
