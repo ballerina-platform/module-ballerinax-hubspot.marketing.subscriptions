@@ -18,9 +18,9 @@ import ballerina/oauth2;
 import ballerina/test;
 
 final boolean isLiveServer = false; // When running against the live server set this variable to true
-configurable string clientId = ?;
-configurable string clientSecret = ?;
-configurable string refreshToken = ?;
+configurable string clientId = "clientId";
+configurable string clientSecret = "clientSecret";
+configurable string refreshToken = "refreshToken";
 final string serviceUrl = isLiveServer ? "https://api.hubapi.com/communication-preferences/v4" : "http://localhost:9090";
 
 OAuth2RefreshTokenGrantConfig auth = {
