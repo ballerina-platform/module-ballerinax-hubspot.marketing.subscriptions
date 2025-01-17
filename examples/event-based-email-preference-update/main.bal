@@ -24,7 +24,7 @@ configurable string clientSecret = ?;
 configurable string refreshToken = ?;
 
 // Configure the connection settings for HubSpot API using OAuth2
-final hsmsubscriptions:ConnectionConfig hsmsubscriptionsConfig = {
+final hsmsubscriptions:ConnectionConfig hsmSubscriptionsConfig = {
     auth: {
         clientId,
         clientSecret,
@@ -34,7 +34,7 @@ final hsmsubscriptions:ConnectionConfig hsmsubscriptionsConfig = {
 };
 
 // Create a client object to interact with the HubSpot Marketing Subscriptions API
-final hsmsubscriptions:Client hsmsubscriptions = check new (hsmsubscriptionsConfig);
+final hsmsubscriptions:Client hsmSubscriptions = check new (hsmSubscriptionsConfig);
 
 // An array of subscriber user IDs to be processed
 final string[] subscriberUserIdArray = ["bh@hubspot.com"]; // Example subscriber email (can be expanded)
@@ -49,11 +49,11 @@ public function main() returns error? {
     // Loop through each subscriber user ID in the array
     foreach string subscriberUserId in subscriberUserIdArray {
         // Make a request to HubSpot API to check subscription status for each user
-        hsmsubscriptions:ActionResponseWithResultsPublicStatus response = check hsmsubscriptions->getCommunicationPreferencesV4StatusesSubscriberidstring(subscriberUserId, channel = "EMAIL");
+        hsmsubscriptions:ActionResponseWithResultsPublicStatus response = check hsmSubscriptions->getCommunicationPreferencesV4StatusesSubscriberidstring(subscriberUserId, channel = "EMAIL");
 
         foreach hsmsubscriptions:PublicStatus item in response.results {
             // Check if the subscription ID matches the one we are interested in, If the user is unsubscribed, add them to the list of IDs to resubscribe
-            if (item.subscriptionId == subscriptionId) && (item.status == "UNSUBSCRIBED") {
+            if item.subscriptionId == subscriptionId && item.status == "UNSUBSCRIBED" {
                 subscriberIdString.push(subscriberUserId);
 
             }
@@ -81,7 +81,7 @@ public function main() returns error? {
         };
 
         // Send the batch request to HubSpot API to update the subscription statuses
-        hsmsubscriptions:BatchResponsePublicStatus response = check hsmsubscriptions->postCommunicationPreferencesV4StatusesBatchWrite(payload);
+        hsmsubscriptions:BatchResponsePublicStatus _ = check hsmSubscriptions->postCommunicationPreferencesV4StatusesBatchWrite(payload);
         io:println("Users are successfully subscribed to this service!");
     }
 }
