@@ -1,11 +1,10 @@
 ## Overview
 
-[HubSpot](https://www.hubspot.com) is an AI-powered customer relationship management (CRM) platform. 
+[HubSpot](https://www.hubspot.com) is an AI-powered customer relationship management (CRM) platform.
 
 The `ballerinax/hubspot.marketing.subscriptions` offers APIs to connect and interact with the [HubSpot API for Marketing Subscriptions](https://developers.hubspot.com/docs/reference/api/marketing/subscriptions) endpoints, specifically based on the [HubSpot Marketing Events REST API](https://developers.hubspot.com/docs/reference/api).
 
 Use the subscriptions API to programmatically subscribe or unsubscribe contacts from your email subscription types, or unsubscribe a contact from all email communication. These APIs also provide support for business units.
-
 
 ## Setup guide
 
@@ -25,8 +24,8 @@ Within app developer accounts, you can create a [Developer Test Account](https:/
 
 1. Navigate to "Test Account" section from the left sidebar.
 
-   ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/main/docs/setup/resources/Test1.png)   
-   
+   ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/main/docs/setup/resources/Test1.png)
+
 2. Click "Create developer test account".
 
    ![Hubspot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions/main/docs/setup/resources/Test2.png)
@@ -145,7 +144,7 @@ import ballerinax/hubspot.marketing.subscriptions as hsmsubscriptions;
 
 2. Instantiate a `hsmsubscriptions:ConnectionConfig` with the obtained credentials and initialize the connector with it.
 
-    ```ballerina 
+    ```ballerina
     configurable string clientId = ?;
     configurable string clientSecret = ?;
     configurable string refreshToken = ?;
@@ -168,16 +167,16 @@ Now, utilize the available connector operations. A sample use case is shown belo
 
 #### Get subscription preferences for a specific contact
 
-```
+```ballerina
 public function main() returns error? {
     hsmsubscriptions: ActionResponseWithResultsPublicWideStatus response = check hsmSubscriptions->getCommunicationPreferencesV4StatusesSubscriberidstring
     (subscriberUserId,channel = "EMAIL");
-}  
-
+}
 ```
+
 ### Step 4: Run the Ballerina application
 
-```
+```shell
 bal run
 ```
 
