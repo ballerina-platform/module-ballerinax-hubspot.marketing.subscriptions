@@ -74,7 +74,7 @@
         "parameters" : [ {
           "name" : "subscriberIdString",
           "in" : "path",
-          "description" : "The contact's email address.",
+          "description" : "The contact's email address",
           "required" : true,
           "style" : "simple",
           "explode" : false,
@@ -84,7 +84,7 @@
         }, {
           "name" : "businessUnitId",
           "in" : "query",
-          "description" : "If you have the [business unit add-on](https://developers.hubspot.com/beta-docs/guides/api/settings/business-units-api), include this parameter to filter results by business unit ID. The default Account business unit will always use `0`.",
+          "description" : "If you have the [business unit add-on](https://developers.hubspot.com/beta-docs/guides/api/settings/business-units-api), include this parameter to filter results by business unit ID. The default Account business unit will always use `0`",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -95,7 +95,7 @@
         }, {
           "name" : "verbose",
           "in" : "query",
-          "description" : "Set to `true` to include the details of the updated subscription statuses in the response. Not including this parameter will result in an empty response.",
+          "description" : "Set to `true` to include the details of the updated subscription statuses in the response. Not including this parameter will result in an empty response",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -106,7 +106,7 @@
         }, {
           "name" : "channel",
           "in" : "query",
-          "description" : "The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`.",
+          "description" : "The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`",
           "required" : true,
           "style" : "form",
           "explode" : true,
@@ -148,7 +148,7 @@
         "parameters" : [ {
           "name" : "subscriberIdString",
           "in" : "path",
-          "description" : "The contact's email address.",
+          "description" : "The contact's email address",
           "required" : true,
           "style" : "simple",
           "explode" : false,
@@ -158,7 +158,7 @@
         }, {
           "name" : "businessUnitId",
           "in" : "query",
-          "description" : "If you have the [business unit add-on](https://developers.hubspot.com/beta-docs/guides/api/settings/business-units-api), include this parameter to filter results by business unit ID. The default Account business unit will always use `0`.",
+          "description" : "If you have the [business unit add-on](https://developers.hubspot.com/beta-docs/guides/api/settings/business-units-api), include this parameter to filter results by business unit ID. The default Account business unit will always use `0`",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -169,7 +169,7 @@
         }, {
           "name" : "verbose",
           "in" : "query",
-          "description" : "Set to `true` to include the details of the updated subscription statuses in the response. Not including this parameter will result in an empty response.",
+          "description" : "Set to `true` to include the details of the updated subscription statuses in the response. Not including this parameter will result in an empty response",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -180,7 +180,7 @@
         }, {
           "name" : "channel",
           "in" : "query",
-          "description" : "The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`.",
+          "description" : "The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`",
           "required" : true,
           "style" : "form",
           "explode" : true,
@@ -224,7 +224,7 @@
         "parameters" : [ {
           "name" : "businessUnitId",
           "in" : "query",
-          "description" : "If you have the [business unit add-on](https://developers.hubspot.com/beta-docs/guides/api/settings/business-units-api), include this parameter to filter results by business unit ID. The default Account business unit will always use `0`.",
+          "description" : "If you have the [business unit add-on](https://developers.hubspot.com/beta-docs/guides/api/settings/business-units-api), include this parameter to filter results by business unit ID. The default Account business unit will always use `0`",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -235,7 +235,7 @@
         }, {
           "name" : "channel",
           "in" : "query",
-          "description" : "The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`.",
+          "description" : "The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`",
           "required" : true,
           "style" : "form",
           "explode" : true,
@@ -295,7 +295,7 @@
         "parameters" : [ {
           "name" : "businessUnitId",
           "in" : "query",
-          "description" : "If you have the [business unit add-on](https://developers.hubspot.com/beta-docs/guides/api/settings/business-units-api), include this parameter to filter results by business unit ID. The default Account business unit will always use `0`.",
+          "description" : "If you have the [business unit add-on](https://developers.hubspot.com/beta-docs/guides/api/settings/business-units-api), include this parameter to filter results by business unit ID. The default Account business unit will always use `0`",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -306,7 +306,7 @@
         }, {
           "name" : "verbose",
           "in" : "query",
-          "description" : "Set to `true` to include the details of the updated subscription statuses in the response. Not including this parameter will result in an empty response.",
+          "description" : "Set to `true` to include the details of the updated subscription statuses in the response. Not including this parameter will result in an empty response",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -317,7 +317,7 @@
         }, {
           "name" : "channel",
           "in" : "query",
-          "description" : "The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`.",
+          "description" : "The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`",
           "required" : true,
           "style" : "form",
           "explode" : true,
@@ -358,7 +358,6 @@
         } ]
       }
     },
-    
     "/definitions" : {
       "get" : {
         "tags" : [ "Subscription definitions" ],
@@ -368,7 +367,7 @@
         "parameters" : [ {
           "name" : "businessUnitId",
           "in" : "query",
-          "description" : "If you have the [business unit add-on](https://developers.hubspot.com/beta-docs/guides/api/settings/business-units-api), include this parameter to filter results by business unit ID. The default Account business unit will always use `0`.",
+          "description" : "If you have the [business unit add-on](https://developers.hubspot.com/beta-docs/guides/api/settings/business-units-api), include this parameter to filter results by business unit ID. The default Account business unit will always use `0`",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -379,7 +378,7 @@
         }, {
           "name" : "includeTranslations",
           "in" : "query",
-          "description" : "Set to `true` to return subscription translations associated with each definition.",
+          "description" : "Set to `true` to return subscription translations associated with each definition",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -422,7 +421,7 @@
         "parameters" : [ {
           "name" : "businessUnitId",
           "in" : "query",
-          "description" : "If you have the [business unit add-on](https://developers.hubspot.com/beta-docs/guides/api/settings/business-units-api), include this parameter to filter results by business unit ID. The default Account business unit will always use `0`.",
+          "description" : "If you have the [business unit add-on](https://developers.hubspot.com/beta-docs/guides/api/settings/business-units-api), include this parameter to filter results by business unit ID. The default Account business unit will always use `0`",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -433,7 +432,7 @@
         }, {
           "name" : "channel",
           "in" : "query",
-          "description" : "The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`.",
+          "description" : "The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`",
           "required" : true,
           "style" : "form",
           "explode" : true,
@@ -493,7 +492,7 @@
         "parameters" : [ {
           "name" : "subscriberIdString",
           "in" : "path",
-          "description" : "The contact's email address.",
+          "description" : "The contact's email address",
           "required" : true,
           "style" : "simple",
           "explode" : false,
@@ -503,7 +502,7 @@
         }, {
           "name" : "businessUnitId",
           "in" : "query",
-          "description" : "If you have the [business unit add-on](https://developers.hubspot.com/beta-docs/guides/api/settings/business-units-api), include this parameter to filter results by business unit ID. The default Account business unit will always use `0`.",
+          "description" : "If you have the [business unit add-on](https://developers.hubspot.com/beta-docs/guides/api/settings/business-units-api), include this parameter to filter results by business unit ID. The default Account business unit will always use `0`",
           "required" : false,
           "style" : "form",
           "explode" : true,
@@ -514,7 +513,7 @@
         }, {
           "name" : "channel",
           "in" : "query",
-          "description" : "The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`.",
+          "description" : "The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`",
           "required" : true,
           "style" : "form",
           "explode" : true,
@@ -556,7 +555,7 @@
         "parameters" : [ {
           "name" : "subscriberIdString",
           "in" : "path",
-          "description" : "The contact's email address.",
+          "description" : "The contact's email address",
           "required" : true,
           "style" : "simple",
           "explode" : false,
@@ -785,13 +784,13 @@
           },
           "legalBasis" : {
             "type" : "string",
-            "enum" : [ "LEGITIMATE_INTEREST_PQL", "LEGITIMATE_INTEREST_CLIENT", "PERFORMANCE_OF_CONTRACT", "CONSENT_WITH_NOTICE", "NON_GDPR", "PROCESS_AND_STORE", "LEGITIMATE_INTEREST_OTHER" ],
-            "nullable": true
+            "nullable" : true,
+            "enum" : [ "LEGITIMATE_INTEREST_PQL", "LEGITIMATE_INTEREST_CLIENT", "PERFORMANCE_OF_CONTRACT", "CONSENT_WITH_NOTICE", "NON_GDPR", "PROCESS_AND_STORE", "LEGITIMATE_INTEREST_OTHER" ]
           },
           "setStatusSuccessReason" : {
             "type" : "string",
-            "enum" : [ "RESUBSCRIBE_OCCURRED", "NO_STATUS_CHANGE", "UNSUBSCRIBE_FROM_ALL_OCCURRED", "REQUESTED_CHANGE_OCCURRED" ],
-            "nullable":true
+            "nullable" : true,
+            "enum" : [ "RESUBSCRIBE_OCCURRED", "NO_STATUS_CHANGE", "UNSUBSCRIBE_FROM_ALL_OCCURRED", "REQUESTED_CHANGE_OCCURRED" ]
           },
           "source" : {
             "type" : "string"
@@ -802,7 +801,7 @@
           },
           "legalBasisExplanation" : {
             "type" : "string",
-            "nullable":true
+            "nullable" : true
           },
           "businessUnitId" : {
             "type" : "integer",
@@ -973,31 +972,31 @@
         "properties" : {
           "statusState" : {
             "type" : "string",
-            "description" : "The status of the contact's subscription.",
+            "description" : "The status of the contact's subscription",
             "enum" : [ "SUBSCRIBED", "UNSUBSCRIBED", "NOT_SPECIFIED" ]
           },
           "channel" : {
             "type" : "string",
-            "description" : "The type of communication channel. Currently, only `EMAIL` is supported.",
+            "description" : "The type of communication channel. Currently, only `EMAIL` is supported",
             "enum" : [ "EMAIL", "WHATSAPP", "SMS" ]
           },
           "subscriberIdString" : {
             "type" : "string",
-            "description" : "The contact's email address."
+            "description" : "The contact's email address"
           },
           "legalBasis" : {
             "type" : "string",
-            "description" : "The legal basis for communication.",
+            "description" : "The legal basis for communication",
             "enum" : [ "LEGITIMATE_INTEREST_PQL", "LEGITIMATE_INTEREST_CLIENT", "PERFORMANCE_OF_CONTRACT", "CONSENT_WITH_NOTICE", "NON_GDPR", "PROCESS_AND_STORE", "LEGITIMATE_INTEREST_OTHER" ]
           },
           "subscriptionId" : {
             "type" : "integer",
-            "description" : "The ID of the subscription to update.",
+            "description" : "The ID of the subscription to update",
             "format" : "int32"
           },
           "legalBasisExplanation" : {
             "type" : "string",
-            "description" : "The explanation for the legal basis."
+            "description" : "The explanation for the legal basis"
           }
         }
       },
@@ -1142,7 +1141,7 @@
           },
           "in" : {
             "type" : "string",
-            "description" : "The name of the field or parameter in which the error was found."
+            "description" : "The name of the field or parameter in which the error was found"
           },
           "context" : {
             "type" : "object",
@@ -1443,14 +1442,15 @@
       "private_apps_legacy" : {
         "type" : "apiKey",
         "name" : "private-app-legacy",
-        "in" : "header"
+        "in" : "header",
+        "x-ballerina-name" : "privateAppLegacy"
       },
       "private_apps" : {
         "type" : "apiKey",
         "name" : "private-app",
-        "in" : "header"
+        "in" : "header",
+        "x-ballerina-name" : "privateApp"
       }
     }
   }
 }
-
