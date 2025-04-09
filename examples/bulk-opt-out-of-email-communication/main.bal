@@ -58,7 +58,7 @@ public function main() returns error? {
             } else {
                 // If the user is not unsubscribed, perform an action to unsubscribe from all emails     
                 hsmsubscriptions:ActionResponseWithResultsPublicWideStatus _ = check hsmSubscriptions->
-                getCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAll(subscriberDetails.subscriberIdString, channel = "EMAIL");
+                getCommunicationPreferencesV4StatusesSubscriberIdStringUnsubscribeAll(subscriberDetails.subscriberIdString, channel = "EMAIL");
                 alreadyOptedOut = false;
                 io:println(subscriberDetails.subscriberIdString, ": User is successfully opted-out from all email subscriptions.");
                 break;

@@ -49,7 +49,7 @@ public function main() returns error? {
     // Loop through each subscriber user ID in the array
     foreach string subscriberUserId in subscriberUserIdArray {
         // Make a request to HubSpot API to check subscription status for each user
-        hsmsubscriptions:ActionResponseWithResultsPublicStatus response = check hsmSubscriptions->getCommunicationPreferencesV4StatusesSubscriberidstring(subscriberUserId, channel = "EMAIL");
+        hsmsubscriptions:ActionResponseWithResultsPublicStatus response = check hsmSubscriptions->getCommunicationPreferencesV4StatusesSubscriberIdString(subscriberUserId, channel = "EMAIL");
 
         foreach hsmsubscriptions:PublicStatus item in response.results {
             // Check if the subscription ID matches the one we are interested in, If the user is unsubscribed, add them to the list of IDs to resubscribe

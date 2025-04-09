@@ -169,7 +169,7 @@ Now, utilize the available connector operations. A sample use case is shown belo
 
 ```ballerina
 public function main() returns error? {
-    hsmsubscriptions: ActionResponseWithResultsPublicWideStatus response = check hsmSubscriptions->getCommunicationPreferencesV4StatusesSubscriberidstring
+    hsmsubscriptions: ActionResponseWithResultsPublicWideStatus response = check hsmSubscriptions->getCommunicationPreferencesV4StatusesSubscriberIdString
     (subscriberUserId,channel = "EMAIL");
 }
 ```
