@@ -112,7 +112,7 @@ public type ActionResponseWithResultsSubscriptionDefinition record {
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
-# Represents the Queries record for the operation: postCommunicationPreferencesV4StatusesBatchRead
+# Represents the Queries record for the operation: post-/communication-preferences/v4/statuses/batch/read
 public type PostCommunicationPreferencesV4StatusesBatchReadQueries record {
     # The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`
     "EMAIL"|"WHATSAPP"|"SMS" channel;
@@ -127,7 +127,7 @@ public type OAuth2RefreshTokenGrantConfig record {|
     string refreshUrl = "https://api.hubapi.com/oauth/v1/token";
 |};
 
-# Represents the Queries record for the operation: postCommunicationPreferencesV4StatusesSubscriberIdStringUnsubscribeAll
+# Represents the Queries record for the operation: post-/communication-preferences/v4/statuses/{subscriberIdString}/unsubscribe-all
 public type PostCommunicationPreferencesV4StatusesSubscriberIdStringUnsubscribeAllQueries record {
     # The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`
     "EMAIL"|"WHATSAPP"|"SMS" channel;
@@ -206,7 +206,7 @@ public type PublicSubscriptionTranslation record {
     int:Signed32 updatedAt;
 };
 
-# Represents the Queries record for the operation: getCommunicationPreferencesV4Definitions
+# Represents the Queries record for the operation: get-/communication-preferences/v4/definitions
 public type GetCommunicationPreferencesV4DefinitionsQueries record {
     # Set to `true` to return subscription translations associated with each definition
     boolean includeTranslations?;
@@ -264,7 +264,7 @@ public type ActionResponseWithResultsPublicStatus record {
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
-# Represents the Queries record for the operation: getCommunicationPreferencesV4StatusesSubscriberIdString
+# Represents the Queries record for the operation: get-/communication-preferences/v4/statuses/{subscriberIdString}
 public type GetCommunicationPreferencesV4StatusesSubscriberIdStringQueries record {
     # The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`
     "EMAIL"|"WHATSAPP"|"SMS" channel;
@@ -281,7 +281,7 @@ public type BatchResponsePublicWideStatusBulkResponse record {
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
-# Represents the Queries record for the operation: postCommunicationPreferencesV4StatusesBatchUnsubscribeAllRead
+# Represents the Queries record for the operation: post-/communication-preferences/v4/statuses/batch/unsubscribe-all/read
 public type PostCommunicationPreferencesV4StatusesBatchUnsubscribeAllReadQueries record {
     # The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`
     "EMAIL"|"WHATSAPP"|"SMS" channel;
@@ -325,7 +325,7 @@ public type ApiKeysConfig record {|
     string privateApp;
 |};
 
-# Represents the Queries record for the operation: getCommunicationPreferencesV4StatusesSubscriberIdStringUnsubscribeAll
+# Represents the Queries record for the operation: get-/communication-preferences/v4/statuses/{subscriberIdString}/unsubscribe-all
 public type GetCommunicationPreferencesV4StatusesSubscriberIdStringUnsubscribeAllQueries record {
     # The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`
     "EMAIL"|"WHATSAPP"|"SMS" channel;
@@ -335,7 +335,7 @@ public type GetCommunicationPreferencesV4StatusesSubscriberIdStringUnsubscribeAl
     boolean verbose = false;
 };
 
-# Represents the Queries record for the operation: postCommunicationPreferencesV4StatusesBatchUnsubscribeAll
+# Represents the Queries record for the operation: post-/communication-preferences/v4/statuses/batch/unsubscribe-all
 public type PostCommunicationPreferencesV4StatusesBatchUnsubscribeAllQueries record {
     # The channel type for the subscription type. Currently, the only supported channel type is `EMAIL`
     "EMAIL"|"WHATSAPP"|"SMS" channel;
