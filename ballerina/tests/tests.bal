@@ -55,8 +55,7 @@ final int:Signed32 testSubscriptionId = 530858989;
 
 isolated function testGetCommunicationPreferencesbySubscriberId() returns error? {
     ActionResponseWithResultsPublicStatus response = check hubspot
-    ->getCommunicationPreferencesV4StatusesSubscriberidstring
-    (testSubscriberUserId, channel = "EMAIL");
+    ->getCommunicationPreferencesV4StatusesSubscriberIdString(testSubscriberUserId, channel = "EMAIL");
     test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
@@ -66,7 +65,7 @@ isolated function testGetCommunicationPreferencesbySubscriberId() returns error?
 
 isolated function testPostCommunicationPreferencesbySubscriberId() returns error? {
     ActionResponseWithResultsPublicStatus response = check hubspot
-    ->postCommunicationPreferencesV4StatusesSubscriberidstring
+    ->postCommunicationPreferencesV4StatusesSubscriberIdString
     (testSubscriberUserId,
         payload = {
         channel: "EMAIL",
@@ -84,7 +83,7 @@ isolated function testPostCommunicationPreferencesbySubscriberId() returns error
 
 isolated function testGetUnsubscribedStatusbySubscriberId() returns error? {
     ActionResponseWithResultsPublicWideStatus response = check hubspot
-    ->getCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAll(testSubscriberUserId, channel = "EMAIL");
+    ->getCommunicationPreferencesV4StatusesSubscriberIdStringUnsubscribeAll(testSubscriberUserId, channel = "EMAIL");
     test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
@@ -143,7 +142,7 @@ isolated function testPostCommunicationPreferencesBatchWrite() returns error? {
 
 isolated function testPostUnsubscribeAllbySubscriberId() returns error? {
     ActionResponseWithResultsPublicStatus response = check hubspot
-    ->postCommunicationPreferencesV4StatusesSubscriberidstringUnsubscribeAll(testSubscriberUserId, channel = "EMAIL");
+    ->postCommunicationPreferencesV4StatusesSubscriberIdStringUnsubscribeAll(testSubscriberUserId, channel = "EMAIL");
     test:assertEquals(response.status, "COMPLETE", "Status should be 'COMPLETE'.");
 }
 
