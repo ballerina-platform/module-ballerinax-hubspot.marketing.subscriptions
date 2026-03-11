@@ -5,8 +5,9 @@ name = "hubspot.marketing.subscriptions"
 version = "@toml.version@"
 license = ["Apache-2.0"]
 authors = ["Ballerina"]
-keywords = ["marketing", "subscriptions", "Vendor/HubSpot", "Area/Social Media and Marketing", "Type/Connector"]
+keywords = ["Marketing", "Subscriptions", "Vendor/HubSpot", "Area/CRM", "Type/Connector"]
 repository = "https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.subscriptions"
+icon = "icon.png"
 
 [build-options]
 observabilityIncluded = true
