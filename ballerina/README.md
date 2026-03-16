@@ -2,9 +2,14 @@
 
 [HubSpot](https://www.hubspot.com) is an AI-powered customer relationship management (CRM) platform.
 
-The `ballerinax/hubspot.marketing.subscriptions` offers APIs to connect and interact with the [HubSpot API for Marketing Subscriptions](https://developers.hubspot.com/docs/reference/api/marketing/subscriptions) endpoints, specifically based on the [HubSpot Marketing Events REST API](https://developers.hubspot.com/docs/reference/api).
+The HubSpot Marketing Subscriptions connector offers APIs to connect and interact with the [HubSpot API for Marketing Subscriptions](https://developers.hubspot.com/docs/reference/api/marketing/subscriptions) endpoints.
 
-Use the subscriptions API to programmatically subscribe or unsubscribe contacts from your email subscription types, or unsubscribe a contact from all email communication. These APIs also provide support for business units.
+### Key Features
+
+- Programmatically subscribe or unsubscribe contacts from email subscription types
+- Support for unsubscribing contacts from all email communication
+- Support for business units
+- Manage communication preferences efficiently
 
 ## Setup guide
 
