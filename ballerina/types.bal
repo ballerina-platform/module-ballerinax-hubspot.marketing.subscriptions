@@ -19,66 +19,115 @@
 
 import ballerina/http;
 
+# Response object containing async action results with wide-status entries and execution metadata
 public type ActionResponseWithResultsPublicWideStatus record {
+    # Timestamp when the action completed
     string completedAt;
+    # Total number of errors encountered during processing
     int:Signed32 numErrors?;
+    # Timestamp when the action was requested
     string requestedAt?;
+    # Timestamp when the action began processing
     string startedAt;
+    # Map of related resource links associated with the response
     record {|string...;|} links?;
+    # List of wide-status results returned by the action
     PublicWideStatus[] results;
+    # List of errors encountered during the action execution
     StandardError[] errors?;
+    # Current processing state of the action: PENDING, PROCESSING, CANCELED, or COMPLETE
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
+# Batch request payload containing a list of string input values
 public type BatchInputString record {
+    # Array of string values to process in the batch request
     string[] inputs;
 };
 
+# Standard error object containing details about a failed operation
 public type StandardError record {
+    # Optional sub-classification of the error category
     record {} subCategory?;
+    # Key-value map providing additional contextual details about the error
     record {|string[]...;|} context;
+    # Map of relevant links related to the error
     record {|string...;|} links?;
+    # Unique identifier for the error instance
     string id?;
+    # High-level classification of the error type
     string category;
+    # Human-readable summary of the error
     string message;
+    # List of detailed error objects describing individual failures
     ErrorDetail[] errors?;
+    # HTTP status code or error category identifier
     string status;
 };
 
+# Represents a contact's current subscription status for a given channel and subscription type
 public type PublicStatus record {
+    # Display name of the associated subscription type
     string subscriptionName?;
+    # Communication channel for this status: EMAIL, WHATSAPP, or SMS
     "EMAIL"|"WHATSAPP"|"SMS" channel;
+    # String identifier of the subscriber (e.g., email address or phone number)
     string subscriberIdString;
+    # The legal basis for processing the contact's communication preferences
     "LEGITIMATE_INTEREST_PQL"|"LEGITIMATE_INTEREST_CLIENT"|"PERFORMANCE_OF_CONTRACT"|"CONSENT_WITH_NOTICE"|"NON_GDPR"|"PROCESS_AND_STORE"|"LEGITIMATE_INTEREST_OTHER"? legalBasis?;
+    # The reason the subscription status was successfully updated
     "RESUBSCRIBE_OCCURRED"|"NO_STATUS_CHANGE"|"UNSUBSCRIBE_FROM_ALL_OCCURRED"|"REQUESTED_CHANGE_OCCURRED"? setStatusSuccessReason?;
+    # The source that initiated the subscription status change
     string 'source;
+    # The unique identifier of the subscription type
     int:Signed32 subscriptionId;
+    # A human-readable explanation of the legal basis for processing
     string? legalBasisExplanation?;
+    # The unique identifier of the associated business unit
     int businessUnitId?;
+    # The contact's current subscription status for this subscription type
     "SUBSCRIBED"|"UNSUBSCRIBED"|"NOT_SPECIFIED" status;
+    # The date and time when the subscription status was last updated
     string timestamp;
 };
 
+# Batch response object containing bulk subscription status results, processing metadata, and any errors encountered during the operation
 public type BatchResponsePublicStatusBulkResponseWithErrors record {
+    # The date and time when the bulk batch operation completed
     string completedAt;
+    # The total number of errors encountered during the bulk batch operation
     int:Signed32 numErrors?;
+    # Timestamp when the batch request was received
     string requestedAt?;
+    # Timestamp when batch processing began
     string startedAt;
+    # Map of related resource names to their associated URIs
     record {|string...;|} links?;
+    # Array of subscription status results from the batch operation
     PublicStatusBulkResponse[] results;
+    # Array of standard errors encountered during batch processing
     StandardError[] errors?;
+    # Current processing state of the batch operation
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
+# Represents the batch response for subscription status operations, including processing state, timestamps, and an array of status results
 public type BatchResponsePublicStatusBulkResponse record {
+    # Timestamp when the batch operation completed
     string completedAt;
+    # Timestamp when the batch request was received
     string requestedAt?;
+    # Timestamp when batch processing began
     string startedAt;
+    # Map of related resource names to their associated URIs
     record {|string...;|} links?;
+    # Array of subscription status results from the batch operation
     PublicStatusBulkResponse[] results;
+    # Current processing state of the batch operation
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
+# Detailed error information including a message, status code, field location, category, and contextual data
 public type ErrorDetail record {
     # A specific category that contains more specific detail about the error
     string subCategory?;
@@ -92,23 +141,39 @@ public type ErrorDetail record {
     string message;
 };
 
+# Represents a subscriber's portal-wide or business-unit-wide communication opt status for a specific channel
 public type PublicWideStatus record {
+    # Scope of the status: portal-wide or business-unit-wide
     "PORTAL_WIDE"|"BUSINESS_UNIT_WIDE" wideStatusType;
+    # Unique string identifier for the subscriber
     string subscriberIdString;
+    # Communication channel the status applies to: EMAIL, WHATSAPP, or SMS
     "EMAIL"|"WHATSAPP"|"SMS" channel;
+    # ID of the business unit associated with the status
     int businessUnitId?;
+    # The contact's overall subscription status across all types
     "SUBSCRIBED"|"UNSUBSCRIBED"|"NOT_SPECIFIED" status;
+    # The date and time when the status was last updated
     string timestamp;
 };
 
+# Response object containing the status, timing metadata, and results of a batch subscription definition action
 public type ActionResponseWithResultsSubscriptionDefinition record {
+    # The date and time when the action completed
     string completedAt;
+    # The number of errors encountered during the action
     int:Signed32 numErrors?;
+    # The date and time when the action was requested
     string requestedAt?;
+    # The date and time when the action began processing
     string startedAt;
+    # A map of relevant hyperlinks associated with the action response
     record {|string...;|} links?;
+    # The list of subscription definitions returned by the action
     SubscriptionDefinition[] results;
+    # A list of errors encountered during the action execution
     StandardError[] errors?;
+    # The current processing state of the action
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
@@ -137,21 +202,30 @@ public type PostCommunicationPreferencesV4StatusesSubscriberIdStringUnsubscribeA
     boolean verbose = false;
 };
 
+# Batch response containing bulk opt-out results, processing metadata, and any errors encountered during the operation
 public type BatchResponsePublicBulkOptOutFromAllResponse record {
+    # Timestamp when the batch opt-out operation completed
     string completedAt;
+    # Total number of errors encountered in the batch opt-out operation
     int:Signed32 numErrors?;
+    # Timestamp when the batch opt-out operation was requested
     string requestedAt?;
+    # Timestamp when the batch opt-out operation began processing
     string startedAt;
+    # Map of related resource links associated with the batch response
     record {|string...;|} links?;
+    # List of bulk opt-out results for each processed contact
     PublicBulkOptOutFromAllResponse[] results;
+    # List of standard errors encountered during batch processing
     StandardError[] errors?;
+    # Current processing status of the batch operation
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
-# Provides a set of configurations for controlling the behaviours when communicating with a remote HTTP endpoint.
+# Provides a set of configurations for controlling the behaviours when communicating with a remote HTTP endpoint
 @display {label: "Connection Config"}
 public type ConnectionConfig record {|
-    # Provides Auth configurations needed when communicating with a remote HTTP endpoint.
+    # Provides Auth configurations needed when communicating with a remote HTTP endpoint
     http:BearerTokenConfig|OAuth2RefreshTokenGrantConfig|ApiKeysConfig auth;
     # The HTTP version understood by the client
     http:HttpVersion httpVersion = http:HTTP_2_0;
@@ -188,21 +262,31 @@ public type ConnectionConfig record {|
     # Enables the inbound payload validation functionality which provided by the constraint package. Enabled by default
     boolean validation = true;
     # Enables relaxed data binding on the client side. When enabled, `nil` values are treated as optional, 
-    # and absent fields are handled as `nilable` types. Enabled by default.
+    # and absent fields are handled as `nilable` types. Enabled by default
     boolean laxDataBinding = true;
 |};
 
+# Bulk response containing subscription statuses for a single subscriber
 public type PublicStatusBulkResponse record {
+    # String identifier of the subscriber
     string subscriberIdString;
+    # List of communication preference statuses for the subscriber
     PublicStatus[] statuses;
 };
 
+# Localized translation of a subscription's name and description for a specific language
 public type PublicSubscriptionTranslation record {
+    # Unix timestamp (int32) when the translation was created
     int:Signed32 createdAt;
+    # Localized display name of the subscription
     string name;
+    # Localized description of the subscription
     string description;
+    # ID of the subscription this translation belongs to
     int:Signed32 subscriptionId;
+    # BCP 47 language code for this translation (e.g., 'en', 'fr')
     string languageCode;
+    # Unix timestamp (int32) when the translation was last updated
     int:Signed32 updatedAt;
 };
 
@@ -214,25 +298,41 @@ public type GetCommunicationPreferencesV4DefinitionsQueries record {
     int businessUnitId?;
 };
 
+# Request payload for updating a contact's subscription status on a specific channel
 public type PartialPublicStatusRequest record {
+    # Desired subscription state: SUBSCRIBED, UNSUBSCRIBED, or NOT_SPECIFIED
     "SUBSCRIBED"|"UNSUBSCRIBED"|"NOT_SPECIFIED" statusState;
+    # Communication channel to update: EMAIL, WHATSAPP, or SMS
     "EMAIL"|"WHATSAPP"|"SMS" channel;
+    # GDPR legal basis justifying the subscription status change
     "LEGITIMATE_INTEREST_PQL"|"LEGITIMATE_INTEREST_CLIENT"|"PERFORMANCE_OF_CONTRACT"|"CONSENT_WITH_NOTICE"|"NON_GDPR"|"PROCESS_AND_STORE"|"LEGITIMATE_INTEREST_OTHER" legalBasis?;
+    # Unique identifier of the subscription type to update
     int subscriptionId;
+    # Free-text explanation supporting the specified legal basis
     string legalBasisExplanation?;
 };
 
+# Batch response object containing subscription status results, processing metadata, and any errors encountered during the operation
 public type BatchResponsePublicStatus record {
+    # The date and time when the batch operation completed
     string completedAt;
+    # The total number of errors encountered during the batch operation
     int:Signed32 numErrors?;
+    # The date and time when the batch operation was requested
     string requestedAt?;
+    # The date and time when the batch operation began processing
     string startedAt;
+    # A map of relevant hypermedia links associated with the batch response
     record {|string...;|} links?;
+    # The list of subscription status objects returned by the batch operation
     PublicStatus[] results;
+    # A list of errors encountered for individual records in the batch
     StandardError[] errors?;
+    # The current processing state of the batch operation
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
+# Defines the subscription status update request for a contact, including channel, subscription ID, status state, and optional legal basis details
 public type PublicStatusRequest record {
     # The status of the contact's subscription
     "SUBSCRIBED"|"UNSUBSCRIBED"|"NOT_SPECIFIED" statusState;
@@ -248,19 +348,31 @@ public type PublicStatusRequest record {
     string legalBasisExplanation?;
 };
 
+# Represents a contact's wide-level subscription statuses across all subscription types for a given subscriber
 public type PublicWideStatusBulkResponse record {
+    # Array of wide-level subscription statuses for the contact
     PublicWideStatus[] wideStatuses;
+    # The contact's email address used as the subscriber identifier
     string subscriberIdString;
 };
 
+# Represents the action response for subscription status operations, including processing state, timestamps, error count, and an array of individual status results
 public type ActionResponseWithResultsPublicStatus record {
+    # Timestamp when the action operation completed
     string completedAt;
+    # The total number of errors encountered during processing
     int:Signed32 numErrors?;
+    # Timestamp when the action was requested
     string requestedAt?;
+    # Timestamp when the action processing began
     string startedAt;
+    # Map of relevant hypermedia links associated with the response
     record {|string...;|} links?;
+    # Array of PublicStatus objects returned by the action
     PublicStatus[] results;
+    # List of standard errors encountered during the action
     StandardError[] errors?;
+    # Current processing state of the action: PENDING, PROCESSING, CANCELED, or COMPLETE
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
@@ -272,12 +384,19 @@ public type GetCommunicationPreferencesV4StatusesSubscriberIdStringQueries recor
     int businessUnitId?;
 };
 
+# Batch response containing wide communication status results for multiple subscribers, including processing state and timestamps
 public type BatchResponsePublicWideStatusBulkResponse record {
+    # Timestamp when the batch operation completed
     string completedAt;
+    # Timestamp when the batch operation was requested
     string requestedAt?;
+    # Timestamp when the batch operation processing began
     string startedAt;
+    # Map of relevant hypermedia links associated with the batch response
     record {|string...;|} links?;
+    # Array of wide status bulk response objects returned by the batch operation
     PublicWideStatusBulkResponse[] results;
+    # Current processing state of the batch: PENDING, PROCESSING, CANCELED, or COMPLETE
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
@@ -289,37 +408,60 @@ public type PostCommunicationPreferencesV4StatusesBatchUnsubscribeAllReadQueries
     int businessUnitId?;
 };
 
+# A batch request object containing multiple subscription status update inputs
 public type BatchInputPublicStatusRequest record {
     PublicStatusRequest[] inputs;
 };
 
+# Defines a communication subscription type, including its metadata, state, and available translations
 public type SubscriptionDefinition record {
+    # Indicates whether the subscription is for internal use only
     boolean isInternal;
+    # The date and time when the subscription definition was created
     string createdAt;
+    # Indicates whether this is the default subscription type
     boolean isDefault;
+    # The channel used to deliver communications for this subscription
     string communicationMethod?;
+    # The intended purpose or use case of the subscription type
     string purpose?;
+    # The display name of the subscription definition
     string name;
+    # Human-readable description of the subscription
     string description;
+    # Unique identifier of the subscription definition
     string id;
+    # Indicates whether the subscription is currently active
     boolean isActive;
+    # ID of the business unit associated with the subscription
     int businessUnitId?;
+    # List of localized translations for the subscription definition
     PublicSubscriptionTranslation[] subscriptionTranslations?;
+    # Timestamp of the most recent update to the subscription
     string updatedAt;
 };
 
+# Batch response containing wide-status subscription results, processing metadata, and any errors encountered during the operation
 public type BatchResponsePublicWideStatusBulkResponseWithErrors record {
+    # Timestamp when the batch operation completed
     string completedAt;
+    # Total number of errors encountered in the batch operation
     int:Signed32 numErrors?;
+    # Timestamp when the batch operation was requested
     string requestedAt?;
+    # Timestamp when the batch operation began processing
     string startedAt;
+    # Map of related resource links associated with the batch response
     record {|string...;|} links?;
+    # List of wide-status bulk response results from the batch operation
     PublicWideStatusBulkResponse[] results;
+    # List of errors encountered during the batch operation
     StandardError[] errors?;
+    # Current processing status of the batch operation
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
-# Provides API key configurations needed when communicating with a remote HTTP endpoint.
+# Provides API key configurations needed when communicating with a remote HTTP endpoint
 public type ApiKeysConfig record {|
     string privateAppLegacy;
     string privateApp;
@@ -345,7 +487,10 @@ public type PostCommunicationPreferencesV4StatusesBatchUnsubscribeAllQueries rec
     boolean verbose = false;
 };
 
+# Represents the opt-out result for a single contact in a bulk unsubscribe operation
 public type PublicBulkOptOutFromAllResponse record {
+    # The unique string identifier of the subscriber
     string subscriberIdString;
+    # List of subscription statuses resulting from the opt-out operation
     PublicStatus[] statuses?;
 };

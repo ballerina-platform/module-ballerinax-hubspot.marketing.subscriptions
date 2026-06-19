@@ -1,6 +1,6 @@
 _Author_:  @SenuDyl\
 _Created_: 2025/01/03\
-_Updated_: 2025/01/09\
+_Updated_: 2026/06/18 \
 _Edition_: Swan Lake
 
 # Sanitation for OpenAPI specification
@@ -41,4 +41,3 @@ The following command was used to generate the Ballerina client from the OpenAPI
 ```bash
 bal openapi -i docs/spec/openapi.json --mode client -o ballerina --client-methods remote --license docs/license.txt 
 ```
-
