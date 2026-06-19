@@ -23,7 +23,7 @@ import ballerina/http;
 public isolated client class Client {
     final http:Client clientEp;
     final readonly & ApiKeysConfig? apiKeyConfig;
-    # Gets invoked to initialize the `connector`.
+    # Gets invoked to initialize the `connector`
     #
     # + config - The configurations to be used when initializing the `connector` 
     # + serviceUrl - URL of the target service 
@@ -41,6 +41,7 @@ public isolated client class Client {
 
     # Batch update subscription status
     #
+    # + payload - A batch input public status request 
     # + headers - Headers to be sent with the request 
     # + return - successful operation 
     remote isolated function postCommunicationPreferencesV4StatusesBatchWrite(BatchInputPublicStatusRequest payload, map<string|string[]> headers = {}) returns BatchResponsePublicStatus|error {
@@ -56,7 +57,7 @@ public isolated client class Client {
         return self.clientEp->post(resourcePath, request, httpHeaders);
     }
 
-    # Retrieve a contact's unsubscribed status
+    # Get contact's unsubscribed status
     #
     # + subscriberIdString - The contact's email address
     # + headers - Headers to be sent with the request 
@@ -73,7 +74,7 @@ public isolated client class Client {
         return self.clientEp->get(resourcePath, httpHeaders);
     }
 
-    # Unsubscribe a contact from all subscriptions
+    # Unsubscribe contact from all
     #
     # + subscriberIdString - The contact's email address
     # + headers - Headers to be sent with the request 
@@ -93,6 +94,7 @@ public isolated client class Client {
 
     # Batch retrieve subscription statuses
     #
+    # + payload - A batch input string 
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - successful operation 
@@ -110,8 +112,9 @@ public isolated client class Client {
         return self.clientEp->post(resourcePath, request, httpHeaders);
     }
 
-    # Batch unsubscribe contacts from all subscriptions
+    # Batch unsubscribe all contacts
     #
+    # + payload - A batch input string 
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - successful operation 
@@ -129,7 +132,7 @@ public isolated client class Client {
         return self.clientEp->post(resourcePath, request, httpHeaders);
     }
 
-    # Retrieve all subscription status definitions
+    # Retrieve all subscription definitions
     #
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
@@ -145,8 +148,9 @@ public isolated client class Client {
         return self.clientEp->get(resourcePath, httpHeaders);
     }
 
-    # Batch retrieve contacts who have opted out of all communications
+    # Batch get opted-out contacts
     #
+    # + payload - A batch input string 
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - successful operation 
@@ -164,7 +168,7 @@ public isolated client class Client {
         return self.clientEp->post(resourcePath, request, httpHeaders);
     }
 
-    # Get subscription preferences for a specific contact
+    # Get contact subscription prefs
     #
     # + subscriberIdString - The contact's email address
     # + headers - Headers to be sent with the request 
@@ -181,9 +185,10 @@ public isolated client class Client {
         return self.clientEp->get(resourcePath, httpHeaders);
     }
 
-    # Update a contact's subscription status
+    # Update contact subscription status
     #
     # + subscriberIdString - The contact's email address
+    # + payload - A partial public status request 
     # + headers - Headers to be sent with the request 
     # + return - successful operation 
     remote isolated function postCommunicationPreferencesV4StatusesSubscriberIdString(string subscriberIdString, PartialPublicStatusRequest payload, map<string|string[]> headers = {}) returns ActionResponseWithResultsPublicStatus|error {
